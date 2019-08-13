@@ -44,8 +44,8 @@
       </div> -->
     </section>
     <footer class="modal-card-foot">
-      <button @click="modalApplyHandler" class="button is-success">Применить</button>
-      <button @click="isSettingsActive = false" class="button">Отменить</button>
+      <button @click="modalApplyHandler" class="button is-success has-fluid-width has-margin">Применить</button>
+      <button @click="isSettingsActive = false" class="button has-fluid-width has-margin">Отменить</button>
     </footer>
   </div>
   <!-- <button @click="isSettingsActive = false" class="modal-close is-large" aria-label="close"></!--> -->
@@ -185,5 +185,22 @@ export default {
   text-align: left;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+.modal-card-foot .button.has-text-wrapped{
+  padding-left: 3px;
+  height: 100%;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.has-fluid-width{
+  width: 100%;
+}
+.has-margin{
+  margin-bottom: 2px;
+}
+.modal-card-foot {
+  padding: 5px;
 }
 </style>
