@@ -19,8 +19,9 @@
 <div class="is-fullsize">
   <p v-show="isLogExists">{{computedlog}}</p>
   <editor v-if="isEditorEnabled" v-model="cellText"></editor>
-  <textarea class="textearea" v-show="!isEditorEnabled" name="text" rows="1" v-model="cellText" placeholder="Some cell text.."> </textarea>
+  <textarea class="textearea" v-if="!isEditorEnabled" name="text" rows="1" v-model="cellText" placeholder="Some cell text.."> </textarea>
 </div>
+<!-- Settings modal -->
 <div :class="{'is-active':isSettingsActive}" class="modal">
   <div @click="isSettingsActive = false" class="modal-background"></div>
   <div @click.stop class="modal-card">
@@ -50,7 +51,6 @@
   <!-- <button @click="isSettingsActive = false" class="modal-close is-large" aria-label="close"></!--> -->
 </div>
 </div>
-
 </template>
 
 <script>
@@ -66,6 +66,12 @@ export default {
       isSettingsActive: false,
       isEditorEnabled: true
     };
+  },
+  watch: {
+    isEditorEnabled: function(){
+      this.saveExcelValues(this.cellText)
+      this.loadExcelValues()
+    }
   },
   mounted: function(){
     const self = this;
