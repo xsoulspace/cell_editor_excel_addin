@@ -74,17 +74,17 @@ export default {
     },
   },
   mounted: function(){
-    const self = this;
-    Excel.run(context => {
+    let self = this;
+    Excel.run(async context => {
       context.workbook.onSelectionChanged.add(self.loadExcelValues)
-      return context.sync()
+      return await context.sync()
     })
     
     const defaultEditor = localStorage.getItem('defaultEditor')=='true'
     if(typeof defaultEditor !="undefined"){
-      this.isEditorEnabled = defaultEditor
+      self.isEditorEnabled = defaultEditor
     }else{
-      this.isEditorEnabled = true
+      self.isEditorEnabled = true
     }
   }, 
   computed: {

@@ -6,10 +6,10 @@ import App from './src/App';
 
 Vue.component('editor', require('./src/Editor'));
 
-// (Office.onReady(info => {
+(Office.onReady(info => {
     new Vue({
       store,
       render: h => h(App),
     }).$mount('#app')
-  // })
-// )()
+  })
+)()
