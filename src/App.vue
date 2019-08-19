@@ -36,12 +36,12 @@
           Перенос строки
         </label>
       </div>
-      <!-- <div class="field">
+      <div class="field">
         <label class="checkbox">
-          <input v-model="isEditorEnabled" type="checkbox">
-          Использовать WYSIWYG(html) редактор 
+          <input v-model="defaultEditor" type="checkbox">
+          Использовать WYSIWYG(html) редактор по умолчанию
         </label>
-      </div> -->
+      </div>
     </section>
     <footer class="modal-card-foot">
       <button @click="modalApplyHandler" class="button is-success has-fluid-width has-margin">Применить</button>
@@ -64,14 +64,14 @@ export default {
   data() {
     return {
       isSettingsActive: false,
-      isEditorEnabled: true
+      isEditorEnabled: false
     };
   },
   watch: {
     isEditorEnabled: function(){
       this.saveExcelValues(this.cellText)
       this.loadExcelValues()
-    }
+    },
   },
   mounted: function(){
     const self = this;
@@ -79,8 +79,24 @@ export default {
       context.workbook.onSelectionChanged.add(self.loadExcelValues)
       return context.sync()
     })
-  },
+    
+    const defaultEditor = localStorage.getItem('defaultEditor')=='true'
+    if(typeof defaultEditor !="undefined"){
+      this.isEditorEnabled = defaultEditor
+    }else{
+      this.isEditorEnabled = true
+    }
+  }, 
   computed: {
+    defaultEditor:{
+      set: function(value){
+        localStorage.setItem('defaultEditor',value)
+      },
+      get: function(){
+        const defaultEditor = localStorage.getItem('defaultEditor')=='true'
+        return defaultEditor
+      }
+    },
     wrapText: {
       set: function(value){
         this.$store.commit('setWrapText',value);
