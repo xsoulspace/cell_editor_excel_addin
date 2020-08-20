@@ -28,7 +28,7 @@
     "@vue/component-compiler-utils": "3.1.1",
     "cssnano": "4.1.10",
     "sass": "1.26.3",
-    "vue-template-compiler": "2.6.11"
+    "vue-template-compiler": "2.6.12"
   },
   "browserslist": "> 0.25%, not dead"
 }
