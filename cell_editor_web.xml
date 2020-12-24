@@ -9,26 +9,26 @@
   <!-- Begin Basic Settings: Add-in metadata, used for all versions of Office unless override provided. -->
 
   <!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
-  <Id>22ef2ff3-6bf3-4684-a1fc-56dc9ec8cf9b</Id>
+  <Id>1244ef90-3e6f-4312-8c1b-b506091e0de2</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
   <Version>0.0.0.3</Version>
   <ProviderName>XSoulSpace</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-  <DisplayName DefaultValue="Sheet Manager" />
-  <Description DefaultValue="Manage your worksheets easily"/>
+  <DisplayName DefaultValue="Cell Editor" />
+  <Description DefaultValue="Edit your worksheet cells easily"/>
 
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-  <IconUrl DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/assets/icon-80.png"/>
+  <IconUrl DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/assets/icon-80.png"/>
 
   <!--If you plan to submit this add-in to the Office Store, uncomment the SupportUrl element below-->
-  <!--<SupportUrl DefaultValue="[Insert the URL of a page that provides support information for the app]" />-->
+  <SupportUrl DefaultValue="xsoulspace.dev" />
 
   <!-- Domains that will be allowed when navigating. For example, if you use ShowTaskpane and then have an href link, navigation will only be allowed if the domain is on this list. -->
   <AppDomains>
-    <AppDomain>https://xsoulspace.dev/sheets_manager_excel_addin</AppDomain>
+    <AppDomain>https://xsoulspace.dev/cell_editor_excel_addin</AppDomain>
   </AppDomains>
   <!--End Basic Settings. -->
 
@@ -37,7 +37,7 @@
     <Host Name="Workbook" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin" />
+    <SourceLocation DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin" />
   </DefaultSettings>
   <!-- End TaskPane Mode integration.  -->
 
@@ -117,20 +117,20 @@
     <!-- You can use resources across hosts and form factors. -->
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
-        <bt:Url id="Commands.Url" DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin/commands/commands.html" />
-        <bt:Url id="Taskpane.Url" DefaultValue="https://xsoulspace.dev/sheets_manager_excel_addin" />
+        <bt:Url id="Commands.Url" DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin/commands/commands.html" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://xsoulspace.dev/cell_editor_excel_addin" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your add-in!" />
         <bt:String id="CommandsGroup.Label" DefaultValue="Management" />
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Sheet Manager" />
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Cell Editor" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
