@@ -45,7 +45,7 @@ div
     div.modal-card(
       @click.stop
     )
-      header.modal-card-head"
+      header.modal-card-head
         p.modal-card-title Настройки
         button(
           @click="isSettingsActive = false"
