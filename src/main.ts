@@ -7,6 +7,8 @@ import './registerServiceWorker'
 import router from './router/screensRouter'
 import store from './store'
 
+Office.onReady(info => {})
+
 createApp(App)
   .use(store)
   .use(router)

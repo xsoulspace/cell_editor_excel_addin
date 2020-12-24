@@ -2,15 +2,11 @@ import { Component } from 'vue'
 import { RouteRegistrator } from './RouteRegistrator'
 
 enum featureWidgetsEnum {
-  SheetWidget = 'SheetWidget',
-  SheetsWidget = 'SheetsWidget',
+  QuillEditor = 'QuillEditor',
 }
 
 const featureWidgetsFilesObj = {
-  SheetWidget: {
-    index: 'index',
-  },
-  SheetsWidget: {
+  QuillEditor: {
     index: 'index',
   },
 }
