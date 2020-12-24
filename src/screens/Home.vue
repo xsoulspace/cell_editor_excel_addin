@@ -54,15 +54,15 @@ div
         )
       section.modal-card-body
         div.field
-          label.checkbox
+          label.checkbox Перенос строки
             input(
               v-model="wrapText" type="checkbox"
-            ) Перенос строки
+            ) 
         div.field
-          label.checkbox
+          label.checkbox Использовать WYSIWYG(html) редактор по умолчанию
             input(
               v-model="defaultEditor" type="checkbox"
-            ) Использовать WYSIWYG(html) редактор по умолчанию
+            ) 
       footer.modal-card-foot
         button.button.is-success.has-fluid-width.has-margin(
           @click="modalApplyHandler"
@@ -98,18 +98,18 @@ export default {
       isSettingsActive.value = false
     }
     const saveExcelCellFormat = () => {
-      Excel.run(async context => {
-        const activeCell = context.workbook.getSelectedRange()
-        activeCell.format.wrapText = wrapText.value
-        return context.sync()
-      })
+      // Excel.run(async context => {
+      //   const activeCell = context.workbook.getSelectedRange()
+      //   activeCell.format.wrapText = wrapText.value
+      //   return context.sync()
+      // })
     }
     const loadExcelValues = (event: any) => {
-      return Excel.run(context => {
-        store.dispatch('setECellValue', event)
-        store.dispatch('setECellWrapText', event)
-        return context.sync()
-      })
+      // return Excel.run(context => {
+      //   store.dispatch('setECellValue', event)
+      //   store.dispatch('setECellWrapText', event)
+      //   return context.sync()
+      // })
     }
     const saveExcelValues = (value: any) => {
       Excel.run(async context => {
@@ -121,6 +121,19 @@ export default {
     }
     const log = (value: any) => {
       computedlog.value = value
+    }
+    return {
+      log,
+      saveExcelCellFormat,
+      loadExcelValues,
+      saveExcelValues,
+      isEditorEnabled,
+      isSettingsActive,
+      defaultEditor,
+      wrapText,
+      computedlog,
+      cellText,
+      modalApplyHandler,
     }
   },
 }
