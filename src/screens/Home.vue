@@ -84,19 +84,14 @@ export default {
     QuillEditor,
   },
   setup() {
-    const store = useStore()
+    // const store = useStore()
 
     const isEditorEnabled = ref(false)
     const isSettingsActive = ref(false)
     const defaultEditor = ref(true)
     const wrapText = ref(true)
-    const computedlog = ref(true)
+    const computedlog = ref('')
     const cellText = ref('')
-
-    const modalApplyHandler = () => {
-      saveExcelCellFormat()
-      isSettingsActive.value = false
-    }
     const saveExcelCellFormat = () => {
       // Excel.run(async context => {
       //   const activeCell = context.workbook.getSelectedRange()
@@ -104,22 +99,27 @@ export default {
       //   return context.sync()
       // })
     }
-    const loadExcelValues = (event: any) => {
+
+    const modalApplyHandler = () => {
+      saveExcelCellFormat()
+      isSettingsActive.value = false
+    }
+    const loadExcelValues = () => {
       // return Excel.run(context => {
       //   store.dispatch('setECellValue', event)
       //   store.dispatch('setECellWrapText', event)
       //   return context.sync()
       // })
     }
-    const saveExcelValues = (value: any) => {
-      Excel.run(async context => {
-        const activeCell = context.workbook.getSelectedRange()
-        activeCell.values = [[value]]
-        activeCell.format.wrapText = wrapText.value
-        return context.sync()
-      })
+    const saveExcelValues = () => {
+      // Excel.run(async context => {
+      //   const activeCell = context.workbook.getSelectedRange()
+      //   activeCell.values = [[value]]
+      //   activeCell.format.wrapText = wrapText.value
+      //   return context.sync()
+      // })
     }
-    const log = (value: any) => {
+    const log = (value: string) => {
       computedlog.value = value
     }
     return {
