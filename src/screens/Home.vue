@@ -7,9 +7,9 @@ div
 
   div.is-fullsize
     p(v-show="isLogExists") {{ computedlog }}
-    //- quill-editor(
-    //-   v-if="isEditorEnabled" v-model="cellText"
-    //- )
+    quill-editor(
+      v-if="isEditorEnabled" v-model="cellText"
+    )
     textarea(
       class="textearea"
       v-if="!isEditorEnabled"
@@ -60,10 +60,11 @@ div
 import { featureWidgets } from '@/router/featureWidgetsRouter'
 import { ref } from 'vue'
 // import { useStore } from 'vuex'
-const { AppBar } = featureWidgets.widgets
+const { AppBar, QuillEditor } = featureWidgets.widgets
 export default {
   components: {
     AppBar,
+    QuillEditor,
   },
   setup() {
     // const store = useStore(storeKey)

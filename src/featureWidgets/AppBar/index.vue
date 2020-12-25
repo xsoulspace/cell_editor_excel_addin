@@ -1,17 +1,17 @@
 <template lang="pug">
 div.header 
-  div.tabs(
-    is-centered is-boxed
-  )
-    div.tabs_tab(
+  .tabs
+    .tabs__tab(
       :class="{'is-active': isEditorEnabled }"
       @click="isEditorEnabled = true"
+      @mouseover="changeIsSearchActive = true"
+      @mouseleave="changeIsSearchActive = false"
     ) 
       div.button.--has-accent
         span.icon
           i.fas.fa-sliders-h WYSIWYG     
     
-    div.tabs_tab(
+    div.tabs__tab(
       :class="{ 'is-active': !isEditorEnabled }"
       @click="isEditorEnabled = false"
     )
@@ -19,17 +19,17 @@ div.header
         span.icon
           i.fas.fa-sliders-h Ввод
 
-    div.tabs_tab(
+    div.tabs__tab(
       @click="isSettingsActive = true"
     )
       div.button.--has-accent 
         span.icon.is-small
           i.fas.fa-sliders-h Настройки
 
-    div.tabs_tab
+    div.tabs__tab
       div.button.--has-accent
-        span.icon info
-          i.fas.fa-sliders-h
+        span.icon 
+          i.fas.fa-sliders-h info
 </template>
 
 <script lang="ts">

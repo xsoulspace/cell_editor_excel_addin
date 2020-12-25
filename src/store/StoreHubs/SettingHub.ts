@@ -1,10 +1,10 @@
 import { AppTheme } from '@/constants/AppTheme'
-import { Languages } from '@/constants/Languages'
+import { Language } from '@/constants/Language'
 // declare namespace SettingsHub {}
 export const SettingsHubState = () => {
   const st = {
     theme: AppTheme.dark,
-    language: Languages.eng,
+    language: Language.eng,
   }
   return st
 }

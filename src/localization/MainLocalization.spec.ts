@@ -1,4 +1,4 @@
-import { Languages } from '@/constants/Languages'
+import { Language } from '@/constants/Language'
 import { MainLocalization } from './MainLocalization'
 import { engLocaleFile } from './_engLocaleFile'
 
@@ -10,7 +10,7 @@ describe('MainLocalization file', () => {
     const result = MainLocalization['_getNestedLocaleString']({
       keysArr,
       localeFile,
-      locale: Languages.eng,
+      locale: Language.eng,
     })
     expect(result).toEqual('')
   })

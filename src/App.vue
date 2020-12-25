@@ -2,19 +2,15 @@
   <router-view />
 </template>
 <script lang="ts">
-import { Languages } from './constants/Languages'
+/// <reference types="@types/office-js" />
+import { Language } from './constants/Language'
 import { MainLocalization } from './localization/MainLocalization'
+
 export default {
   setup() {
-    MainLocalization.createProvider({ locale: Languages.rus })
+    MainLocalization.createProvider({ locale: Language.rus })
   },
-  mounted() {
-    if (document.getElementById('office')) return // was already loaded
-    var scriptTag = document.createElement('script')
-    scriptTag.src = 'https://appsforoffice.microsoft.com/lib/1/hosted/office.js'
-    scriptTag.id = 'office'
-    document.getElementsByTagName('head')[0].appendChild(scriptTag)
-  },
+  mounted() {},
 }
 </script>
 
