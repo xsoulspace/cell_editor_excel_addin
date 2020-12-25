@@ -1,5 +1,7 @@
 import { getExcelContext } from '@/modules/ExcelContext'
 import { createStore } from 'vuex'
+
+
 const state = {
   value: '',
   log: '',

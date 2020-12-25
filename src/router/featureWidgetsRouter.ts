@@ -1,14 +1,23 @@
 import { Component } from 'vue'
 import { RouteRegistrator } from './RouteRegistrator'
 
+
 enum featureWidgetsEnum {
   QuillEditor = 'QuillEditor',
+  AppBar = 'AppBar',
+  TextareaEditor = 'TextareaEditor'
 }
 
 const featureWidgetsFilesObj = {
   QuillEditor: {
     index: 'index',
   },
+  AppBar: {
+    index: 'index',
+  },
+  TextareaEditor: {
+    index: 'index'
+  }
 }
 
 type FeatureWidgets = {

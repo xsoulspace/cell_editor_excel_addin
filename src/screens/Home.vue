@@ -1,28 +1,9 @@
 <template lang="pug">
 div
-  nav.nav
-    div.tabs(
-        is-centered is-boxed
-      )
-      ul
-        li(
-          :class="{'is-active': isEditorEnabled }"
-          @click="isEditorEnabled = true"
-        )
-          a WYSIWYG
-        
-        li(
-          :class="{ 'is-active': !isEditorEnabled }"
-          @click="isEditorEnabled = false"
-        )
-          a Поле ввода
-
-        li(
-          @click="isSettingsActive = true"
-        )
-          a
-            span.icon.is-small
-              i.fas.fa-sliders-h
+  //- Bar
+  AppBar
+ 
+  //- Body
 
   div.is-fullsize
     p(v-show="isLogExists") {{ computedlog }}
@@ -37,6 +18,8 @@ div
       v-model="cellText"
       placeholder="Some cell text.."
     )
+
+  //- Settings Modal
     
   div.modal(
     :class="{ 'is-active': isSettingsActive }"
@@ -77,11 +60,13 @@ div
 import { featureWidgets } from '@/router/featureWidgetsRouter'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
-const QuillEditor = featureWidgets.widgets.QuillEditor
+
+const {QuillEditor, AppBar} = featureWidgets.widgets
 
 export default {
   components: {
     QuillEditor,
+    AppBar,
   },
   setup() {
     // const store = useStore()
@@ -92,6 +77,8 @@ export default {
     const wrapText = ref(true)
     const computedlog = ref('')
     const cellText = ref('')
+
+
     const saveExcelCellFormat = () => {
       // Excel.run(async context => {
       //   const activeCell = context.workbook.getSelectedRange()
