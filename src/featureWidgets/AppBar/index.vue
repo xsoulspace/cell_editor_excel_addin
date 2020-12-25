@@ -1,34 +1,31 @@
 <template lang="pug">
-div
-  nav.nav
+div.header 
     div.tabs(
         is-centered is-boxed
-      )
-      ul
-        li(
-         :class="{'is-active': isEditorEnabled }"
-         @click="isEditorEnabled = true"
         )
-          a WYSIWYG
+    
+        div.tabs_tab.button(
+            :class="{'is-active': isEditorEnabled }"
+            @click="isEditorEnabled = true"
+            ) WYSIWYG
+            
         
-        li(
-          :class="{ 'is-active': !isEditorEnabled }"
-          @click="isEditorEnabled = false"
-        )
-          a Ввод
-
-        li(
-          @click="isSettingsActive = true"
-        )
-          a
-            span.icon.is-small
-              i.fas.fa-sliders-h
-</template>
-<script>
-
-
-export default {
+        div.tabs_tab.button(
+            :class="{ 'is-active': !isEditorEnabled }"
+            @click="isEditorEnabled = false"
+            ) Ввод
     
 
-}
-</script>              
+        div.tabs_tab.button(
+            @click="isSettingsActive = true"
+            ) Настройки
+            span.icon
+            i.fas.fa-sliders-h
+
+        div.tabs_tab.button Info    
+            span.icon.is-small
+            i.fas.fa-sliders-h
+</template>
+<script>
+export default {}
+</script>

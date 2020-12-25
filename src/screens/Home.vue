@@ -70,6 +70,7 @@ export default {
   },
   setup() {
     // const store = useStore()
+    // const store = useStore(storeKey)
 
     const isEditorEnabled = ref(false)
     const isSettingsActive = ref(false)
