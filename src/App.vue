@@ -1,10 +1,22 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view />
 </template>
+<script lang="ts">
+import { Languages } from './constants/Languages'
+import { MainLocalization } from './localization/MainLocalization'
+export default {
+  setup() {
+    MainLocalization.createProvider({ locale: Languages.rus })
+  },
+  mounted() {
+    if (document.getElementById('office')) return // was already loaded
+    var scriptTag = document.createElement('script')
+    scriptTag.src = 'https://appsforoffice.microsoft.com/lib/1/hosted/office.js'
+    scriptTag.id = 'office'
+    document.getElementsByTagName('head')[0].appendChild(scriptTag)
+  },
+}
+</script>
 
 <style lang="scss">
 #app {
