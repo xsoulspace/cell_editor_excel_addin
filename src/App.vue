@@ -1,15 +1,10 @@
 <template>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div>
   <router-view />
 </template>
-<script lang="ts">
-import { Languages } from './constants/Languages'
-import { MainLocalization } from './localization/MainLocalization'
-export default {
-  setup() {
-    MainLocalization.createProvider({ locale: Languages.rus })
-  },
-}
-</script>
 
 <style lang="scss">
 #app {
