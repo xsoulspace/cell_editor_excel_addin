@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import { AppRouter } from './router/screensRouter'
-// import { store, storeKey } from './store/index'
+import { store, storeKey } from './store/index'
 
 const addOfficeScript = () => {
   if (document.getElementById('office')) return // was already loaded
@@ -22,6 +22,6 @@ if (infoGlobal != null) {
 }
 
 createApp(App)
-  // .use(store, storeKey)
+  .use(store, storeKey)
   .use(AppRouter)
   .mount('#app')

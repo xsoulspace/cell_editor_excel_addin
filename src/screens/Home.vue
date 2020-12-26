@@ -4,122 +4,51 @@ div
   AppBar
  
   //- Body
-
+  DialogPopup(
+    :isActive='isDialogActive'
+  )
   div.is-fullsize
-    p(v-show="isLogExists") {{ computedlog }}
+
     quill-editor(
-      v-if="isEditorEnabled" v-model="cellText"
     )
     textarea(
       class="textearea"
-      v-if="!isEditorEnabled"
       name="text"
       rows="1"
-      v-model="cellText"
       placeholder="Some cell text.."
     )
 
   //- Settings Modal
-    
-  div.modal(
-    :class="{ 'is-active': isSettingsActive }"
-  )
-    div.modal-background(@click="isSettingsActive = false")
-    div.modal-card(
-      @click.stop
-    )
-      header.modal-card-head
-        p.modal-card-title Настройки
-        button(
-          @click="isSettingsActive = false"
-          class="delete"
-          aria-label="close"
-        )
-      section.modal-card-body
-        div.field
-          label.checkbox Перенос строки
-            input(
-              v-model="wrapText" type="checkbox"
-            ) 
-        div.field
-          label.checkbox Использовать WYSIWYG(html) редактор по умолчанию
-            input(
-              v-model="defaultEditor" type="checkbox"
-            ) 
-      footer.modal-card-foot
-        button.button.is-success.has-fluid-width.has-margin(
-          @click="modalApplyHandler"
-        ) Применить
-        button.button.has-fluid-width.has-margin(
-          @click="isSettingsActive = false"
-        ) Отменить
+  
+  //- (
+  //-   :isActive='true'
+  //- )
+
         
 </template>
 
 <script lang="ts">
 import { featureWidgets } from '@/router/featureWidgetsRouter'
-import { ref } from 'vue'
-// import { useStore } from 'vuex'
+import { ref, provide } from 'vue'
+import { uiWidgets } from '@/router/uiWidgetsRouter'
+import { updateIsDialogActive } from './Home.d'
 const { AppBar, QuillEditor } = featureWidgets.widgets
+const { DialogPopup } = uiWidgets.widgets
+
 export default {
   components: {
     AppBar,
     QuillEditor,
+    DialogPopup,
   },
   setup() {
-    // const store = useStore(storeKey)
-    const isLogExists = ref(false)
-    const isEditorEnabled = ref(false)
-    const isSettingsActive = ref(false)
-    const defaultEditor = ref(true)
-    const wrapText = ref(true)
-    const computedlog = ref('')
-    const cellText = ref('')
+    const isDialogActive = ref(false)
+    const updateIsDialogActive: updateIsDialogActive = (isActive: boolean) => {
+      isDialogActive.value = isActive
+    }
+    provide('updateIsDialogActive', updateIsDialogActive)
 
-    const saveExcelCellFormat = () => {
-      // Excel.run(async context => {
-      //   const activeCell = context.workbook.getSelectedRange()
-      //   activeCell.format.wrapText = wrapText.value
-      //   return context.sync()
-      // })
-    }
-
-    const modalApplyHandler = () => {
-      saveExcelCellFormat()
-      isSettingsActive.value = false
-    }
-    const loadExcelValues = () => {
-      // return Excel.run(context => {
-      //   store.dispatch('setECellValue', event)
-      //   store.dispatch('setECellWrapText', event)
-      //   return context.sync()
-      // })
-    }
-    const saveExcelValues = () => {
-      // Excel.run(async context => {
-      //   const activeCell = context.workbook.getSelectedRange()
-      //   activeCell.values = [[value]]
-      //   activeCell.format.wrapText = wrapText.value
-      //   return context.sync()
-      // })
-    }
-    const log = (value: string) => {
-      computedlog.value = value
-    }
-    return {
-      log,
-      saveExcelCellFormat,
-      loadExcelValues,
-      saveExcelValues,
-      isEditorEnabled,
-      isSettingsActive,
-      defaultEditor,
-      wrapText,
-      computedlog,
-      cellText,
-      modalApplyHandler,
-      isLogExists,
-    }
+    return { isDialogActive }
   },
 }
 </script>

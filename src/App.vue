@@ -2,7 +2,6 @@
   <router-view />
 </template>
 <script lang="ts">
-/// <reference types="@types/office-js" />
 import { Language } from './constants/Language'
 import { MainLocalization } from './localization/MainLocalization'
 
@@ -10,7 +9,6 @@ export default {
   setup() {
     MainLocalization.createProvider({ locale: Language.rus })
   },
-  mounted() {},
 }
 </script>
 

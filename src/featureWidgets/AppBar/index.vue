@@ -2,29 +2,23 @@
 div.header 
   .tabs
     .tabs__tab(
-      :class="{'is-active': isEditorEnabled }"
-      @click="isEditorEnabled = true"
-      @mouseover="changeIsSearchActive = true"
-      @mouseleave="changeIsSearchActive = false"
     ) 
       div.button.--has-accent
-        span.icon
-          i.fas.fa-sliders-h WYSIWYG     
+        span WYSIWYG     
     
     div.tabs__tab(
-      :class="{ 'is-active': !isEditorEnabled }"
-      @click="isEditorEnabled = false"
     )
       div.button.--has-accent
         span.icon
           i.fas.fa-sliders-h Ввод
 
-    div.tabs__tab(
-      @click="isSettingsActive = true"
+    div.tabs__tab( 
+      @click='updateIsDialogActive(true)'
     )
-      div.button.--has-accent 
+      div.button.--has-accent(
+      )
         span.icon.is-small
-          i.fas.fa-sliders-h Настройки
+          i.fas.fa-sliders-h
 
     div.tabs__tab
       div.button.--has-accent
@@ -33,5 +27,19 @@ div.header
 </template>
 
 <script lang="ts">
-export default {}
+import { inject } from 'vue'
+import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
+import { updateIsDialogActive } from '@/screens/Home.d'
+
+export default {
+  name: 'AppBar',
+
+  setup() {
+    const updateIsDialogActive = inject<updateIsDialogActive>(
+      'updateIsDialogActive'
+    )
+
+    return { updateIsDialogActive }
+  },
+}
 </script>
