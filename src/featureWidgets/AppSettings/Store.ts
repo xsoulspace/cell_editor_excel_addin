@@ -1,51 +1,57 @@
 import { AppTheme } from '@/constants/AppTheme'
 import { Locales } from '@/constants/Locales'
-import { StaticProvider, StaticProviderI } from '@/entities/StaticProvider'
+import {
+  saveToStorage,
+  StaticProvider,
+  StaticProviderStorage,
+} from '@/entities/StaticProvider'
 import { reactive, toRefs } from 'vue'
 
 module AppSettingsStore {
-  export interface State {
+  export type State = {
     locale: Locales
     theme: AppTheme
   }
 }
 export class AppSettingsStore extends StaticProvider
-  implements StaticProviderI {
-  static state = reactive({
+  implements StaticProviderStorage<AppSettingsStore.State> {
+  static storageName = 'AppSettings'
+  static state: AppSettingsStore.State = reactive({
     locale: Locales.eng,
     theme: AppTheme.dark,
   })
   stateRef = toRefs(AppSettingsStore.state)
 
-  _storageName = 'AppSettings'
-
   get theme(): AppTheme {
     return AppSettingsStore.state.theme
   }
+
+  @saveToStorage<AppSettingsStore.State, AppTheme>({
+    storageName: AppSettingsStore.storageName,
+    state: AppSettingsStore.state,
+  })
   set theme(value: AppTheme) {
     const { theme } = this.stateRef
     theme.value = value
-    this.saveToStorage()
   }
+
   get locale(): Locales {
     return AppSettingsStore.state.locale
   }
+
+  @saveToStorage<AppSettingsStore.State, Locales>({
+    storageName: AppSettingsStore.storageName,
+    state: AppSettingsStore.state,
+  })
   set locale(language: Locales) {
     const { locale } = this.stateRef
     locale.value = language
-    this.saveToStorage()
   }
   loadFromStorage() {
-    const settingsStr = localStorage.getItem(this._storageName)
+    const settingsStr = localStorage.getItem(AppSettingsStore.storageName)
     if (settingsStr == null) return
     const settingsState = JSON.parse(settingsStr) as AppSettingsStore.State
     this.theme = settingsState.theme
     this.locale = settingsState.locale
-  }
-  saveToStorage() {
-    localStorage.setItem(
-      this._storageName,
-      JSON.stringify(AppSettingsStore.state)
-    )
   }
 }
