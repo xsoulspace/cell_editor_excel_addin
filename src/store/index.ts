@@ -1,6 +1,6 @@
 import { InjectionKey } from 'vue'
 import { createStore, Store } from 'vuex'
-import { settingHub } from './StoreHub/SettingHub'
+import { settingHub, SettingsHub } from './StoreHub/SettingHub'
 
 declare module '@vue/runtime-core' {
   // provide typings for `this.$store`
@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
 export interface StoreRootState {
   root: boolean
   version: string
+  settingHub: SettingsHub.State
 }
 
 export enum storeHub {

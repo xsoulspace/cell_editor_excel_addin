@@ -2,6 +2,7 @@ import { AppTheme } from '@/constants/AppTheme'
 import { Languages } from '@/constants/Languages'
 import { Action, ActionTree, Module, Mutation, MutationTree } from 'vuex'
 import { StoreRootState } from '../index'
+
 export module SettingsHub {
   // Types
   export type State = {
@@ -15,6 +16,7 @@ export module SettingsHub {
     loadAllFromLocalStorage = 'loadAllFromLocalStorage',
     saveAllToLocalStorage = 'saveAllToLocalStorage',
   }
+
   export enum MutationEnum {
     changeTheme = 'changeTheme',
     changeLanguage = 'changeLanguage',
@@ -31,6 +33,11 @@ export module SettingsHub {
 
   export type Actions = ActionTree<State, StoreRootState> &
     Required<Record<ActionEnum, Action<State, StoreRootState>>>
+}
+
+export interface SettingsHubModule {
+  actions: SettingsHub.Actions
+  mutations: SettingsHub.Mutations
 }
 
 export module SettingsHub {

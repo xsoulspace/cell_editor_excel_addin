@@ -7,17 +7,20 @@ div
   DialogPopup(
     :isActive='isDialogActive'
   )
+  p {{theme}}
+  div(
+    @click='changeTheme'
+  ) change theme
   div.is-fullsize
 
-    quill-editor(
-    )
+    //- quill-editor(
+    //- )
     textarea(
       class="textearea"
       name="text"
       rows="1"
       placeholder="Some cell text.."
     )
-
   //- Settings Modal
   
   //- (
@@ -33,6 +36,9 @@ import { ref, provide } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
+import { AppSettings } from '@/featureWidgets/AppSettings/index'
+import { AppTheme } from '@/constants/AppTheme'
+
 const { AppBar, QuillEditor } = featureWidgets.widgets
 const { DialogPopup } = uiWidgets.widgets
 
@@ -48,10 +54,23 @@ export default {
       isDialogActive.value = isActive
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
-    
-    
+    const log = ref('')
+    const { appSettings } = AppSettings.injectAppSettings()
+    appSettings.loadFromStorage()
+    const theme = appSettings.stateRef.theme
 
-    return { isDialogActive }
+    const changeTheme = () => {
+      switch (theme.value) {
+        case AppTheme.dark:
+          appSettings.theme = AppTheme.light
+          break
+
+        default:
+          appSettings.theme = AppTheme.dark
+          break
+      }
+    }
+    return { isDialogActive, log, theme, changeTheme, appSettings }
   },
 }
 </script>
