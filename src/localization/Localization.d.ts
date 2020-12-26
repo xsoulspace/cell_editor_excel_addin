@@ -27,6 +27,6 @@ declare interface SettingsLangInterface extends LocaleMessageInterface {
   chooseColor: string
 }
 
-declare type LocaleFiles = { [lang in Languages]: LocaleFile }
+declare type LocaleFiles = { [lang in Locales]: LocaleFile }
 
 type LocaleFile = LocaleMessageInterface

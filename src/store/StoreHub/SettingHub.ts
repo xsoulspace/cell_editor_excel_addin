@@ -1,5 +1,5 @@
 import { AppTheme } from '@/constants/AppTheme'
-import { Languages } from '@/constants/Languages'
+import { Locales } from '@/constants/Locales'
 import { Action, ActionTree, Module, Mutation, MutationTree } from 'vuex'
 import { StoreRootState } from '../index'
 
@@ -7,7 +7,7 @@ export module SettingsHub {
   // Types
   export type State = {
     theme: AppTheme
-    language: Languages
+    language: Locales
     storageName: string
   }
   export enum ActionEnum {
@@ -23,7 +23,7 @@ export module SettingsHub {
   }
 
   export interface ChangeLanguageArg {
-    newLang: Languages
+    newLang: Locales
   }
   export interface ChangeThemeArg {
     newTheme: AppTheme
@@ -43,7 +43,7 @@ export interface SettingsHubModule {
 export module SettingsHub {
   export const state = (): State => ({
     theme: AppTheme.dark,
-    language: Languages.eng,
+    language: Locales.eng,
     storageName: 'Settings',
   })
 

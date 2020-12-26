@@ -1,3 +1,3 @@
-import { Languages } from '@/constants/Languages'
+import { Locales } from '@/constants/Locales'
 
-declare type LangfullEntity = { [lang in Languages]: string }
+declare type LangfullEntity = { [lang in Locales]: string }

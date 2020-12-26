@@ -54,22 +54,21 @@ export default {
       isDialogActive.value = isActive
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
-    const { appSettings } = AppSettings.injectAppSettings()
-    appSettings.loadFromStorage()
-    const theme = appSettings.stateRef.theme
+    const appSettings = AppSettings.injectAppSettings<AppSettings>()
+    const theme = appSettings.store.stateRef.theme
 
     const changeTheme = () => {
       switch (theme.value) {
         case AppTheme.dark:
-          appSettings.theme = AppTheme.light
+          appSettings.store.theme = AppTheme.light
           break
 
         default:
-          appSettings.theme = AppTheme.dark
+          appSettings.store.theme = AppTheme.dark
           break
       }
     }
-    return { isDialogActive, theme, changeTheme, appSettings }
+    return { isDialogActive, theme, changeTheme }
   },
 }
 </script>

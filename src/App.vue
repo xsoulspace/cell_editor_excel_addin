@@ -2,14 +2,17 @@
   <router-view />
 </template>
 <script lang="ts">
-import { Languages } from '@/constants/Languages'
+import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettings } from '@/featureWidgets/AppSettings/index'
 
 export default {
   setup() {
-    MainLocalization.createProvider({ locale: Languages.rus })
+    MainLocalization.createProvider()
     AppSettings.createProvider()
+    const appSettings = new AppSettings()
+    appSettings.loadFromStorage()
+    new MainLocalization().locale = appSettings.locale
   },
 }
 </script>
