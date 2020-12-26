@@ -16,6 +16,7 @@
           i.fas.fa-times
 
     section.modal__card-body
+      slot(name='body')
       .form
         .form__field
           .checkbox__input

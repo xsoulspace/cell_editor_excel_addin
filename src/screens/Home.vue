@@ -2,15 +2,12 @@
 div
   //- Bar
   AppBar
- 
   //- Body
   DialogPopup(
     :isActive='isDialogActive'
   )
-  p {{theme}}
-  div(
-    @click='changeTheme'
-  ) change theme
+    template(v-slot:body)
+      AppSettings
   div.is-fullsize
 
     //- quill-editor(
@@ -36,16 +33,16 @@ import { ref, provide } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
-import { AppSettings } from '@/featureWidgets/AppSettings/index'
 import { AppTheme } from '@/constants/AppTheme'
 
-const { AppBar, QuillEditor } = featureWidgets.widgets
+const { AppBar, AppSettings, QuillEditor } = featureWidgets.widgets
 const { DialogPopup } = uiWidgets.widgets
 
 export default {
   components: {
     AppBar,
     QuillEditor,
+    AppSettings,
     DialogPopup,
   },
   setup() {
@@ -54,21 +51,8 @@ export default {
       isDialogActive.value = isActive
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
-    const appSettings = AppSettings.injectAppSettings<AppSettings>()
-    const theme = appSettings.store.stateRef.theme
 
-    const changeTheme = () => {
-      switch (theme.value) {
-        case AppTheme.dark:
-          appSettings.store.theme = AppTheme.light
-          break
-
-        default:
-          appSettings.store.theme = AppTheme.dark
-          break
-      }
-    }
-    return { isDialogActive, theme, changeTheme }
+    return { isDialogActive }
   },
 }
 </script>

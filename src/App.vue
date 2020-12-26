@@ -4,13 +4,13 @@
 <script lang="ts">
 import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
-import { AppSettings } from '@/featureWidgets/AppSettings/index'
+import { AppSettingsStore } from '@/featureWidgets/AppSettings/Store'
 
 export default {
   setup() {
     MainLocalization.createProvider()
-    AppSettings.createProvider()
-    const appSettings = new AppSettings()
+    AppSettingsStore.createProvider()
+    const appSettings = new AppSettingsStore()
     appSettings.loadFromStorage()
     new MainLocalization().locale = appSettings.locale
   },

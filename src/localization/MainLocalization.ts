@@ -4,19 +4,18 @@ import { deepCopyObj } from '@/functions/deepCopyObj'
 import { Ref, ref } from 'vue'
 import { engLocaleFile } from './_engLocaleFile'
 import { rusLocaleFile } from './_rusLocaleFile'
-class State {
-  static locale: Ref<Locales> = ref(Locales.eng)
-}
+
 export class MainLocalization extends StaticProvider {
+  static locale: Ref<Locales> = ref(Locales.eng)
   localeFiles = {
     eng: engLocaleFile,
     rus: rusLocaleFile,
   }
   public get locale(): Locales {
-    return State.locale.value
+    return MainLocalization.locale.value
   }
   public set locale(value: Locales) {
-    State.locale.value = value
+    MainLocalization.locale.value = value
   }
   private static _getNestedLocaleString({
     localeFile,

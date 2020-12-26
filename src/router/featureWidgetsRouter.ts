@@ -5,6 +5,7 @@ enum featureWidgetsEnum {
   QuillEditor = 'QuillEditor',
   AppBar = 'AppBar',
   TextareaEditor = 'TextareaEditor',
+  AppSettings = 'AppSettings',
 }
 
 const featureWidgetsFilesObj = {
@@ -15,6 +16,9 @@ const featureWidgetsFilesObj = {
     index: 'index',
   },
   TextareaEditor: {
+    index: 'index',
+  },
+  AppSettings: {
     index: 'index',
   },
 }
