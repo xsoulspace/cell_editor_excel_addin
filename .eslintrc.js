@@ -16,6 +16,8 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'off' : 'off',
+    '@typescript-eslint/prefer-namespace-keyword': 'off',
+    '@typescript-eslint/no-namespace': 'off',
     'no-case-declarations': 'off',
     'no-inner-declarations': 'off',
     'no-fallthrough': 'off',

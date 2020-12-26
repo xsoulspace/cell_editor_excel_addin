@@ -32,6 +32,7 @@ import { featureWidgets } from '@/router/featureWidgetsRouter'
 import { ref, provide } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
+import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 const { AppBar, QuillEditor } = featureWidgets.widgets
 const { DialogPopup } = uiWidgets.widgets
 
@@ -46,7 +47,9 @@ export default {
     const updateIsDialogActive: updateIsDialogActive = (isActive: boolean) => {
       isDialogActive.value = isActive
     }
-    provide('updateIsDialogActive', updateIsDialogActive)
+    provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
+    
+    
 
     return { isDialogActive }
   },

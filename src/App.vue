@@ -2,12 +2,12 @@
   <router-view />
 </template>
 <script lang="ts">
-import { Language } from './constants/Language'
+import { Languages } from './constants/Languages'
 import { MainLocalization } from './localization/MainLocalization'
 
 export default {
   setup() {
-    MainLocalization.createProvider({ locale: Language.rus })
+    MainLocalization.createProvider({ locale: Languages.rus })
   },
 }
 </script>

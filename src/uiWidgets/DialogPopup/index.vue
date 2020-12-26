@@ -48,6 +48,7 @@
 <script lang="ts">
 import { inject } from 'vue'
 import { updateIsDialogActive } from '@/screens/Home.d'
+import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 
 export default {
   name: 'DialogPopup',
@@ -56,7 +57,7 @@ export default {
   },
   setup() {
     const updateIsDialogActive = inject<updateIsDialogActive>(
-      'updateIsDialogActive'
+      FeatureWidgetProvider.updateIsDialogActive
     )
     return { updateIsDialogActive }
   },

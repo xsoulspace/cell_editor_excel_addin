@@ -17,7 +17,7 @@ declare type TourLangInterface = {
 
 declare interface SettingsLangInterface extends LocaleMessageInterface {
   header: string
-  chooseLanguage: string
+  chooseLanguages: string
   darkTheme: string
   sheetsNumerationEnabled: string
   showNumeration: string
@@ -27,6 +27,6 @@ declare interface SettingsLangInterface extends LocaleMessageInterface {
   chooseColor: string
 }
 
-declare type LocaleFiles = { [lang in Language]: LocaleFile }
+declare type LocaleFiles = { [lang in Languages]: LocaleFile }
 
 type LocaleFile = LocaleMessageInterface

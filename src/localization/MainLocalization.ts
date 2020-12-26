@@ -1,4 +1,4 @@
-import { Language } from '@/constants/Language'
+import { Languages } from '@/constants/Languages'
 import { deepCopyObj } from '@/functions/deepCopyObj'
 import { inject, provide, Ref, ref } from 'vue'
 import { engLocaleFile } from './_engLocaleFile'
@@ -10,11 +10,11 @@ export class MainLocalization {
     rus: rusLocaleFile,
   }
   private static _providerKey = Symbol()
-  private static _locale: Ref<Language> = ref(Language.eng)
-  public static get locale(): Language {
+  private static _locale: Ref<Languages> = ref(Languages.eng)
+  public static get locale(): Languages {
     return MainLocalization._locale.value
   }
-  public static set locale(value: Language) {
+  public static set locale(value: Languages) {
     MainLocalization._locale.value = value
   }
   private static _getNestedLocaleString({
@@ -24,7 +24,7 @@ export class MainLocalization {
   }: {
     localeFile: LocaleFile
     keysArr: string[]
-    locale: Language
+    locale: Languages
   }) {
     try {
       let tempObj: LocaleMessageInterface | LocaleFile = deepCopyObj(localeFile)
@@ -66,7 +66,7 @@ export class MainLocalization {
     })
     return strValue
   }
-  static createProvider({ locale }: { locale: Maybe<Language> }): void {
+  static createProvider({ locale }: { locale: Maybe<Languages> }): void {
     if (locale) this.locale = locale
     provide(this._providerKey, this)
   }
@@ -79,6 +79,6 @@ export class MainLocalization {
   }
   static switchLang() {
     MainLocalization.locale =
-      MainLocalization.locale == Language.eng ? Language.rus : Language.eng
+      MainLocalization.locale == Languages.eng ? Languages.rus : Languages.eng
   }
 }

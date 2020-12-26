@@ -36,7 +36,7 @@ export default {
 
   setup() {
     const updateIsDialogActive = inject<updateIsDialogActive>(
-      'updateIsDialogActive'
+      FeatureWidgetProvider.updateIsDialogActive
     )
 
     return { updateIsDialogActive }
