@@ -12,7 +12,7 @@ div
 
   div.is-fullsize
     QuillEditor(
-      v-if='textEditor == TextEditor.WYSIWYG'
+      v-show='textEditor == TextEditor.WYSIWYG'
       v-model="excelCellValue"
     )
     TextareaEditor(

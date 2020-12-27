@@ -56,13 +56,9 @@ export default {
     watch(
       textValue,
       (val, oldVal) => {
-        console.log({ editor: editor, val })
-        // if (editor.value) {
-        //   const { root } = toRefs(editor.value)
-        //   const { innerHTML } = toRefs(root)
-        //   console.log({ root, innerHTML })
-        //   innerHTML.value = val
-        // }
+        if (editor) {
+          editor.root.innerHTML = val
+        }
       },
       { immediate: true }
     )
@@ -76,8 +72,8 @@ export default {
         placeholder: props.placeholder,
         theme: 'snow',
       })
-
-      editor.on('text-change', val => updateValue(val))
+      // FIXME:
+      // editor.on('text-change', () => updateValue(editor.root.innerHTML))
     })
     return { editorReference }
   },
