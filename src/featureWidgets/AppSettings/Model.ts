@@ -1,5 +1,6 @@
 import { AppTheme } from '@/constants/AppTheme'
 import { Locales } from '@/constants/Locales'
+import { SaveAsContentType } from '@/constants/SaveAsContentType'
 import { TextEditor } from '@/constants/TextEditor'
 import {
   ProviderStorage,
@@ -13,6 +14,7 @@ export type State = {
   locale: Locales
   theme: AppTheme
   textEditor: TextEditor
+  saveAsContentType: SaveAsContentType
 }
 @StaticClass<StaticProviderStorage<State>>()
 export class AppSettingsModel implements ProviderStorage<State> {
@@ -21,6 +23,7 @@ export class AppSettingsModel implements ProviderStorage<State> {
     locale: Locales.eng,
     theme: AppTheme.dark,
     textEditor: TextEditor.plainText,
+    saveAsContentType: SaveAsContentType.plainText,
   })
 
   get stateRef() {
@@ -45,6 +48,12 @@ export class AppSettingsModel implements ProviderStorage<State> {
     textEditor.value = value
   }
 
+  @saveToStorage<State, SaveAsContentType>()
+  set saveAsContentType(value: SaveAsContentType) {
+    const { saveAsContentType } = this.stateRef
+    saveAsContentType.value = value
+  }
+
   loadFromStorage() {
     const stateStr = localStorage.getItem(AppSettingsModel.storageName)
     if (stateStr == null) return
@@ -56,5 +65,7 @@ export class AppSettingsModel implements ProviderStorage<State> {
     this.theme = settingsState.theme ?? AppTheme.light
     this.locale = settingsState.locale ?? Locales.eng
     this.textEditor = settingsState.textEditor ?? TextEditor.plainText
+    this.saveAsContentType =
+      settingsState.saveAsContentType ?? SaveAsContentType.plainText
   }
 }

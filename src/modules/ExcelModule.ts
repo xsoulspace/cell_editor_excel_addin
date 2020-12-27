@@ -60,4 +60,14 @@ export class ExcelModule {
 
     await context.sync()
   }
+  async registerOnSelectCellChangeEvent(callback: Function) {
+    const context = await getExcelContext()
+    context.workbook.onSelectionChanged.add(async () => await callback())
+    await context.sync()
+  }
+  async unregisterOnSelectCellChangeEvent(callback: Function) {
+    const context = await getExcelContext()
+    context.workbook.onSelectionChanged.remove(async () => await callback())
+    await context.sync()
+  }
 }

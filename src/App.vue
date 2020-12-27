@@ -8,6 +8,7 @@ import { CellValueModel } from '@/models/CellValueModel'
 import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model'
 import { Provider } from '@/modules/Provider'
 import { AppSessionModel } from './models/AppSessionModel'
+import { ExcelModule } from './modules/ExcelModule'
 
 export default {
   name: 'App',
@@ -25,9 +26,22 @@ export default {
   async mounted() {
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
     const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
-    await cellValueModel.init({
-      appSessionModel,
-    })
+    const { isInExcel } = appSessionModel.stateRef
+    if (isInExcel) {
+      const excelModel = new ExcelModule()
+      excelModel.registerOnSelectCellChangeEvent(cellValueModel.updateFromExcel)
+    }
+  },
+  async beforeUnmount() {
+    const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
+    const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
+    const { isInExcel } = appSessionModel.stateRef
+    if (isInExcel) {
+      const excelModel = new ExcelModule()
+      excelModel.unregisterOnSelectCellChangeEvent(
+        cellValueModel.updateFromExcel
+      )
+    }
   },
 }
 </script>

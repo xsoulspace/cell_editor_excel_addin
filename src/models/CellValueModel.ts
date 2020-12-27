@@ -18,17 +18,6 @@ export class CellValueModel implements ProviderStorage<State> {
 
   excelModule = new ExcelModule()
 
-  async init({ appSessionModel }: { appSessionModel: AppSessionModel }) {
-    const { isInExcel } = appSessionModel.stateRef
-    if (isInExcel.value) {
-      const value = await this.excelModule.getSelectedCellValue({
-        withWrap: false,
-      })
-      if (value.cellValue)
-        this.excelCellValue = this.getStringFromExcelArr(value.cellValue)
-    }
-  }
-
   getStringFromExcelArr<T extends ExcelData>(value: T) {
     const row = value[0] ?? []
     const cellValue = row[0]
@@ -42,7 +31,13 @@ export class CellValueModel implements ProviderStorage<State> {
     }
     return ''
   }
-
+  async updateFromExcel() {
+    const value = await this.excelModule.getSelectedCellValue({
+      withWrap: false,
+    })
+    if (value.cellValue)
+      this.excelCellValue = this.getStringFromExcelArr(value.cellValue)
+  }
   async updateValue(arg: {
     cellValue: string
     appSessionModel: AppSessionModel
