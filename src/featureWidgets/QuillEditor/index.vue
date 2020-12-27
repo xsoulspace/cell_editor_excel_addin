@@ -1,6 +1,6 @@
 <template>
   <div class="wcontainer">
-    <div ref="editor"></div>
+    <div ref="editorReference"></div>
   </div>
 </template>
 <script lang="ts">
@@ -8,7 +8,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.bubble.css'
 import 'quill/dist/quill.snow.css'
 import Quill from 'quill'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, toRefs, watch } from 'vue'
 
 //https://pineco.de/wrapping-quill-editor-in-a-vue-component/
 export default {
@@ -31,11 +31,12 @@ export default {
     const updateValue = (val: string) => {
       context.emit('update:modelValue', val)
     }
-    const value = computed({
+    const textValue = computed({
       set: updateValue,
       get: () => props.modelValue,
     })
     // Editor Setup
+
     const editorReference = ref(null)
     const toolbarOptionsSnow = [
       ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -51,28 +52,34 @@ export default {
       [{ align: [] }],
       ['clean'], // remove formatting button
     ]
-    const editor = new Quill(editorReference, {
-      modules: {
-        toolbar: toolbarOptionsSnow,
-        //https://quilljs.com/docs/quickstart/
-      },
-      placeholder: props.placeholder,
-      theme: 'snow',
-    })
-
+    let editor: Maybe<any> = null
     watch(
-      value,
+      textValue,
       (val, oldVal) => {
-        editor.root.root.innerHTML = val
+        console.log({ editor: editor, val })
+        // if (editor.value) {
+        //   const { root } = toRefs(editor.value)
+        //   const { innerHTML } = toRefs(root)
+        //   console.log({ root, innerHTML })
+        //   innerHTML.value = val
+        // }
       },
       { immediate: true }
     )
     onMounted(() => {
-      editor.root.root.innerHTML = ''
-      editor.on('text-change', updateValue)
-    })
+      ;(editorReference.value as any).innerHTML = ''
+      editor = new Quill(editorReference.value, {
+        modules: {
+          toolbar: toolbarOptionsSnow,
+          //https://quilljs.com/docs/quickstart/
+        },
+        placeholder: props.placeholder,
+        theme: 'snow',
+      })
 
-    return { value }
+      editor.on('text-change', val => updateValue(val))
+    })
+    return { editorReference }
   },
 }
 </script>
