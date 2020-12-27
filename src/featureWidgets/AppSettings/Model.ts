@@ -1,7 +1,12 @@
 import { AppTheme } from '@/constants/AppTheme'
 import { Locales } from '@/constants/Locales'
 import { TextEditor } from '@/constants/TextEditor'
-import { saveToStorage, StaticProviderStorage } from '@/entities/StaticProvider'
+import {
+  ProviderStorage,
+  saveToStorage,
+  StaticProviderStorage,
+} from '@/entities/ProviderStorage'
+import { StaticClass } from '@/entities/StaticClass'
 import { reactive, toRefs } from 'vue'
 
 export type State = {
@@ -9,8 +14,12 @@ export type State = {
   theme: AppTheme
   textEditor: TextEditor
 }
-
-export class AppSettingsModel implements StaticProviderStorage<State> {
+@StaticClass<StaticProviderStorage<State>>()
+export class AppSettingsModel implements ProviderStorage<State> {
+  state: string
+  constructor() {
+    this.state = 'ola'
+  }
   static storageName = 'AppSettings'
   static state: State = reactive({
     locale: Locales.eng,
@@ -22,28 +31,19 @@ export class AppSettingsModel implements StaticProviderStorage<State> {
     return toRefs(AppSettingsModel.state)
   }
 
-  @saveToStorage<State, AppTheme>({
-    storageName: AppSettingsModel.storageName,
-    state: AppSettingsModel.state,
-  })
+  @saveToStorage<State, AppTheme>()
   set theme(value: AppTheme) {
     const { theme } = this.stateRef
     theme.value = value
   }
 
-  @saveToStorage<State, Locales>({
-    storageName: AppSettingsModel.storageName,
-    state: AppSettingsModel.state,
-  })
+  @saveToStorage<State, Locales>()
   set locale(value: Locales) {
     const { locale } = this.stateRef
     locale.value = value
   }
 
-  @saveToStorage<State, TextEditor>({
-    storageName: AppSettingsModel.storageName,
-    state: AppSettingsModel.state,
-  })
+  @saveToStorage<State, TextEditor>()
   set textEditor(value: TextEditor) {
     const { textEditor } = this.stateRef
     textEditor.value = value

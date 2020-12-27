@@ -1,19 +1,22 @@
-import { saveToStorage, StaticProviderStorage } from '@/entities/StaticProvider'
+import {
+  ProviderStorage,
+  saveToStorage,
+  StaticProviderStorage,
+} from '@/entities/ProviderStorage'
+import { StaticClass } from '@/entities/StaticClass'
 import { reactive, toRefs } from 'vue'
 
-export type State = {
+type State = {
   wrapText: boolean
 }
-export class CellValueSettings implements StaticProviderStorage<State> {
+@StaticClass<StaticProviderStorage<State>>()
+export class CellValueSettings implements ProviderStorage<State> {
   static storageName = 'CellValueSettings'
   static state: State = reactive({ wrapText: false })
   get stateRef() {
     return toRefs(CellValueSettings.state)
   }
-  @saveToStorage<State, boolean>({
-    state: CellValueSettings.state,
-    storageName: CellValueSettings.storageName,
-  })
+  @saveToStorage<State, boolean>()
   set wrapText(value: boolean) {
     const { wrapText } = this.stateRef
     wrapText.value = value

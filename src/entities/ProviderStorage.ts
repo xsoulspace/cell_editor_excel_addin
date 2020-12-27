@@ -1,12 +1,13 @@
 import { ToRefs } from 'vue'
 
-export interface StaticProviderStorage<S> {
+export interface ProviderStorage<S> {
   stateRef: ToRefs<S>
   fromJson({ stateStr }: { stateStr: string }): void
   loadFromStorage(): void
+  constructor: Function
 }
 
-interface SaveToStorageArg<S> {
+export interface StaticProviderStorage<S> {
   storageName: string
   state: S
 }
@@ -14,10 +15,9 @@ interface SaveToStorageArg<S> {
  * Decorator to save state in localStorage
  * @param param0
  */
-export const saveToStorage = <S, T>(arg: SaveToStorageArg<S>) => {
-  const { state, storageName } = arg
+export const saveToStorage = <S, T>() => {
   return (
-    target: StaticProviderStorage<S>,
+    target: ProviderStorage<S>,
     propertyKey: string,
     descriptor?: Maybe<TypedPropertyDescriptor<T>>
   ) => {
@@ -25,9 +25,15 @@ export const saveToStorage = <S, T>(arg: SaveToStorageArg<S>) => {
       const set = descriptor.set
       descriptor.set = function(...arg) {
         if (set == undefined) throw Error(`set ${propertyKey} is not defined!`)
+        const staticProps = (target.constructor as unknown) as StaticProviderStorage<
+          S
+        >
 
         set.call(target, ...arg)
-        localStorage.setItem(storageName, JSON.stringify(state))
+        localStorage.setItem(
+          staticProps.storageName,
+          JSON.stringify(staticProps.state)
+        )
       }
       return descriptor
     }
