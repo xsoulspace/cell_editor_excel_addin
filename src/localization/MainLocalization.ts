@@ -1,18 +1,14 @@
 import { Locales } from '@/constants/Locales'
-import { StaticProvider } from '@/entities/StaticProvider'
 import { deepCopyObj } from '@/functions/deepCopyObj'
 import { Ref, ref } from 'vue'
 import { engLocaleFile } from './_engLocaleFile'
 import { rusLocaleFile } from './_rusLocaleFile'
 
-export class MainLocalization extends StaticProvider {
+export class MainLocalization {
   static locale: Ref<Locales> = ref(Locales.eng)
   localeFiles = {
     eng: engLocaleFile,
     rus: rusLocaleFile,
-  }
-  public get locale(): Locales {
-    return MainLocalization.locale.value
   }
   public set locale(value: Locales) {
     MainLocalization.locale.value = value

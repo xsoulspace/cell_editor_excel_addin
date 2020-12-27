@@ -8,6 +8,7 @@ div
   )
     template(v-slot:body)
       AppSettings
+      CellValueSettings
   div.is-fullsize
 
     //- quill-editor(
@@ -33,9 +34,13 @@ import { ref, provide } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
-import { AppTheme } from '@/constants/AppTheme'
 
-const { AppBar, AppSettings, QuillEditor } = featureWidgets.widgets
+const {
+  AppBar,
+  AppSettings,
+  QuillEditor,
+  CellValueSettings,
+} = featureWidgets.widgets
 const { DialogPopup } = uiWidgets.widgets
 
 export default {
@@ -44,6 +49,7 @@ export default {
     QuillEditor,
     AppSettings,
     DialogPopup,
+    CellValueSettings,
   },
   setup() {
     const isDialogActive = ref(false)
@@ -51,7 +57,6 @@ export default {
       isDialogActive.value = isActive
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
-
     return { isDialogActive }
   },
 }

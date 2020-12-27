@@ -6,6 +6,7 @@ enum featureWidgetsEnum {
   AppBar = 'AppBar',
   TextareaEditor = 'TextareaEditor',
   AppSettings = 'AppSettings',
+  CellValueSettings = 'CellValueSettings',
 }
 
 const featureWidgetsFilesObj = {
@@ -19,6 +20,9 @@ const featureWidgetsFilesObj = {
     index: 'index',
   },
   AppSettings: {
+    index: 'index',
+  },
+  CellValueSettings: {
     index: 'index',
   },
 }

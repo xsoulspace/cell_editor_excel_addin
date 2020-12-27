@@ -5,14 +5,19 @@
 import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettingsStore } from '@/featureWidgets/AppSettings/Store'
+import { CellValueStore } from './featureWidgets/CellValueStore'
+import { CellValueSettings } from './featureWidgets/CellValueSettings/Store'
+import { Provider } from './modules/Provider'
 
 export default {
+  name: 'App',
   setup() {
-    MainLocalization.createProvider()
-    AppSettingsStore.createProvider()
-    const appSettings = new AppSettingsStore()
+    const appSettings = Provider.get<AppSettingsStore>(AppSettingsStore)
+    const mainLocalization = Provider.get<MainLocalization>(MainLocalization)
     appSettings.loadFromStorage()
-    new MainLocalization().locale = appSettings.locale
+    mainLocalization.locale = appSettings.locale
+    const cellValueSettings = Provider.get<CellValueSettings>(CellValueSettings)
+    cellValueSettings.loadFromStorage()
   },
 }
 </script>

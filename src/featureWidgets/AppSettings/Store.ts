@@ -1,29 +1,27 @@
 import { AppTheme } from '@/constants/AppTheme'
+import { DefaultEditor } from '@/constants/DefaultEditor'
 import { Locales } from '@/constants/Locales'
-import {
-  saveToStorage,
-  StaticProvider,
-  StaticProviderStorage,
-} from '@/entities/StaticProvider'
+import { saveToStorage, StaticProviderStorage } from '@/entities/StaticProvider'
 import { reactive, toRefs } from 'vue'
 
 module AppSettingsStore {
   export type State = {
     locale: Locales
     theme: AppTheme
+    defaultEditor: DefaultEditor
   }
 }
-export class AppSettingsStore extends StaticProvider
+export class AppSettingsStore
   implements StaticProviderStorage<AppSettingsStore.State> {
   static storageName = 'AppSettings'
   static state: AppSettingsStore.State = reactive({
     locale: Locales.eng,
     theme: AppTheme.dark,
+    defaultEditor: DefaultEditor.plainText,
   })
-  stateRef = toRefs(AppSettingsStore.state)
 
-  get theme(): AppTheme {
-    return AppSettingsStore.state.theme
+  get stateRef() {
+    return toRefs(AppSettingsStore.state)
   }
 
   @saveToStorage<AppSettingsStore.State, AppTheme>({
@@ -35,23 +33,36 @@ export class AppSettingsStore extends StaticProvider
     theme.value = value
   }
 
-  get locale(): Locales {
-    return AppSettingsStore.state.locale
-  }
-
   @saveToStorage<AppSettingsStore.State, Locales>({
     storageName: AppSettingsStore.storageName,
     state: AppSettingsStore.state,
   })
-  set locale(language: Locales) {
+  set locale(value: Locales) {
     const { locale } = this.stateRef
-    locale.value = language
+    locale.value = value
   }
+
+  @saveToStorage<AppSettingsStore.State, DefaultEditor>({
+    storageName: AppSettingsStore.storageName,
+    state: AppSettingsStore.state,
+  })
+  set defaultEditor(value: DefaultEditor) {
+    const { defaultEditor } = this.stateRef
+    defaultEditor.value = value
+  }
+
   loadFromStorage() {
-    const settingsStr = localStorage.getItem(AppSettingsStore.storageName)
-    if (settingsStr == null) return
-    const settingsState = JSON.parse(settingsStr) as AppSettingsStore.State
-    this.theme = settingsState.theme
-    this.locale = settingsState.locale
+    const stateStr = localStorage.getItem(AppSettingsStore.storageName)
+    if (stateStr == null) return
+    this.fromJson({ stateStr })
+  }
+  fromJson({ stateStr }: { stateStr: string }) {
+    if (stateStr.length <= 1) return
+    const settingsState = JSON.parse(stateStr) as Partial<
+      AppSettingsStore.State
+    >
+    this.theme = settingsState.theme ?? AppTheme.light
+    this.locale = settingsState.locale ?? Locales.eng
+    this.defaultEditor = settingsState.defaultEditor ?? DefaultEditor.plainText
   }
 }

@@ -2,7 +2,7 @@
 
 import '@/uiStyle/style.scss'
 import { createApp } from 'vue'
-import App from './App.vue'
+import AppProvider from './AppProvider.vue'
 import './registerServiceWorker'
 import { AppRouter } from './router/screensRouter'
 import { store, storeKey } from './store/index'
@@ -21,7 +21,7 @@ if (infoGlobal != null) {
   Office.onReady(async context => context)
 }
 
-createApp(App)
+createApp(AppProvider)
   .use(store, storeKey)
   .use(AppRouter)
   .mount('#app')
