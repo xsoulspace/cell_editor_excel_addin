@@ -42,7 +42,10 @@ export default {
       const finalText = (() => {
         switch (saveAsContentType.value) {
           case SaveAsContentType.html:
-            return props.modelValue
+            const formattedHtml = HtmlToTextCoverter.toHtml({
+              text: props.modelValue,
+            })
+            return formattedHtml
           case SaveAsContentType.plainText:
             const formattedText = HtmlToTextCoverter.toText({
               html: props.modelValue,
@@ -57,6 +60,11 @@ export default {
       get: getValue,
     })
     const localValue = ref('')
+    watch(saveAsContentType, (newContentType, oldContentType) => {
+      console.log('conver')
+      console.log(textValue.value)
+      localValue.value = textValue.value
+    })
     onMounted(() => {
       localValue.value = textValue.value
     })

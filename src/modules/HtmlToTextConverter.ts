@@ -54,6 +54,13 @@ export class HtmlToTextCoverter {
     temp.remove()
     return text
   }
+  static toHtmlManually({ text }: { text: string }) {
+    const formattedHtml =
+      '<p>' +
+      text.replaceAll(/\n([ \t]*\n)+/g, '</p><p>').replace('\n', '<br />') +
+      '</p>'
+    return formattedHtml
+  }
   static toHtml({ text }: { text: string }) {
     const isHtml = this.getIsHtmlValid({ html: text })
     if (isHtml) return text
