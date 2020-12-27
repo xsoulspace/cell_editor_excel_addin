@@ -29,7 +29,9 @@ export default {
     const { isInExcel } = appSessionModel.stateRef
     if (isInExcel) {
       const excelModel = new ExcelModule()
-      excelModel.registerOnSelectCellChangeEvent(cellValueModel.updateFromExcel)
+      await excelModel.registerOnSelectCellChangeEvent(
+        cellValueModel.updateFromExcel
+      )
     }
   },
   async beforeUnmount() {
@@ -38,7 +40,7 @@ export default {
     const { isInExcel } = appSessionModel.stateRef
     if (isInExcel) {
       const excelModel = new ExcelModule()
-      excelModel.unregisterOnSelectCellChangeEvent(
+      await excelModel.unregisterOnSelectCellChangeEvent(
         cellValueModel.updateFromExcel
       )
     }
