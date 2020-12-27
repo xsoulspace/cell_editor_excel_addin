@@ -7,6 +7,7 @@ import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { CellValueModel } from '@/models/CellValueModel'
 import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
 import { Provider } from '@/modules/Provider'
+import { AppSessionModel } from './models/AppSessionModel'
 
 export default {
   name: 'App',
@@ -18,9 +19,13 @@ export default {
 
     const cellValueSettings = Provider.get<CellValueSettings>(CellValueSettings)
     cellValueSettings.loadFromStorage()
-
+  },
+  async mounted() {
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
-    cellValueModel.init({ cellValueSettings })
+    const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
+    await cellValueModel.init({
+      appSessionModel,
+    })
   },
 }
 </script>

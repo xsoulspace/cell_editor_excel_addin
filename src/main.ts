@@ -13,9 +13,11 @@ const addOfficeScript = () => {
   scriptTag.id = 'office'
   document.getElementsByTagName('head')[0].appendChild(scriptTag)
 }
-
-const infoGlobal = window.sessionStorage['hostInfoValue']
-if (infoGlobal != null) {
+export const getIsInExcelApp = (): boolean => {
+  const infoGlobal = window.sessionStorage['hostInfoValue']
+  return infoGlobal != null
+}
+if (getIsInExcelApp()) {
   addOfficeScript()
   Office.onReady(async context => context)
 }

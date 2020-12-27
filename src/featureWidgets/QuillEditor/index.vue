@@ -1,6 +1,6 @@
 <template>
   <div class="wcontainer">
-    <!-- <div ref="editor"></div> -->
+    <div ref="editor"></div>
   </div>
 </template>
 <script>

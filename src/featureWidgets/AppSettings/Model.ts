@@ -16,10 +16,6 @@ export type State = {
 }
 @StaticClass<StaticProviderStorage<State>>()
 export class AppSettingsModel implements ProviderStorage<State> {
-  state: string
-  constructor() {
-    this.state = 'ola'
-  }
   static storageName = 'AppSettings'
   static state: State = reactive({
     locale: Locales.eng,

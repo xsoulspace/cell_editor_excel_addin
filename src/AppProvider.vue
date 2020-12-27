@@ -1,5 +1,5 @@
-<template lang="pug">
-App
+<template>
+  <App />
 </template>
 <script lang="ts">
 import { MainLocalization } from '@/localization/MainLocalization'
@@ -8,6 +8,7 @@ import { CellValueModel } from '@/models/CellValueModel'
 import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
 import { Provider } from '@/modules/Provider'
 import App from './App.vue'
+import { AppSessionModel } from './models/AppSessionModel'
 export default {
   name: 'AppProvider',
   components: {
@@ -17,8 +18,9 @@ export default {
     Provider.providers([
       MainLocalization,
       AppSettingsModel,
-      CellValueModel,
       CellValueSettings,
+      AppSessionModel,
+      CellValueModel,
     ])
   },
 }
