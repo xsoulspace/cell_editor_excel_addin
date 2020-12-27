@@ -31,7 +31,6 @@ div.header
 <script lang="ts">
 import { inject } from 'vue'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
-import { updateIsDialogActive } from '@/screens/Home.d'
 import { Provider } from '@/modules/Provider'
 import { AppSettingsModel } from '../AppSettings/Model'
 import { TextEditor } from '@/constants/TextEditor'

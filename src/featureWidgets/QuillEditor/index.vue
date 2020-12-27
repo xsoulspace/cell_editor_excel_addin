@@ -13,6 +13,9 @@ import { Provider } from '@/modules/Provider'
 import { AppSettingsModel } from '../AppSettings/Model'
 import { SaveAsContentType } from '@/constants/SaveAsContentType'
 import { HtmlToTextCoverter } from '@/modules/HtmlToTextConverter'
+import { CellValueSettingsModel } from '../CellValueSettings/Model'
+import { AppSessionModel } from '@/models/AppSessionModel'
+import { TextEditor } from '@/constants/TextEditor'
 //https://pineco.de/wrapping-quill-editor-in-a-vue-component/
 export default {
   name: 'QuillEditor',
@@ -61,43 +64,50 @@ export default {
     }
     const textValue = computed({
       set: updateValue,
-      get: () => props.modelValue,
+      get: getValue,
     })
     // Editor Setup
 
     const editorReference = ref(null)
-    const toolbarOptionsSnow = [
-      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-      ['blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-      // [{ 'direction': 'rtl' }],                         // text direction
-      [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-      // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-      [{ font: [] }],
-      [{ align: [] }],
-      ['clean'], // remove formatting button
-    ]
+
+    const toolbarOptionsSnow: {
+      [contentType in SaveAsContentType]: any[][]
+    } = {
+      html: [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        // [{ 'direction': 'rtl' }],                         // text direction
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
+        ['clean'], // remove formatting button
+      ],
+      plainText: [],
+    }
     let editor: Maybe<any> = null
-    watch(
-      textValue,
-      (val, oldVal) => {
-        if (editor) editor.root.innerHTML = val
-      },
-      { immediate: true }
-    )
+    // watch(
+    //   textValue,
+    //   (val, oldVal) => {
+    //     if (editor) editor.root.innerHTML = val
+    //   },
+    //   { immediate: true }
+    // )
     onMounted(() => {
       ;(editorReference.value as any).innerHTML = ''
       editor = new Quill(editorReference.value, {
         modules: {
-          toolbar: toolbarOptionsSnow,
+          toolbar: toolbarOptionsSnow[saveAsContentType.value],
           //https://quilljs.com/docs/quickstart/
         },
         placeholder: props.placeholder,
         theme: 'snow',
       })
+      if (editor) editor.root.innerHTML = textValue.value
       editor.on('text-change', () => updateValue(editor.root.innerHTML))
     })
     return { editorReference }

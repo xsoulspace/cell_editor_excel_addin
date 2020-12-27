@@ -12,7 +12,7 @@ div
 
   div.is-fullsize
     QuillEditor(
-      v-show='textEditor == TextEditor.WYSIWYG'
+      v-if='textEditor == TextEditor.WYSIWYG'
       v-model="excelCellValue"
     )
     TextareaEditor(
@@ -26,7 +26,6 @@ div
 import { featureWidgets } from '@/router/featureWidgetsRouter'
 import { ref, provide, computed } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
-import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 import { Provider } from '@/modules/Provider'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
@@ -55,10 +54,12 @@ export default {
   },
   setup() {
     const isDialogActive = ref(false)
-    const updateIsDialogActive: updateIsDialogActive = (isActive: boolean) => {
+    const updateIsDialogActiveFn: updateIsDialogActive = (
+      isActive: boolean
+    ) => {
       isDialogActive.value = isActive
     }
-    provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
+    provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActiveFn)
     const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
     const cellValueSettingsModel = Provider.get<CellValueSettingsModel>(
       CellValueSettingsModel

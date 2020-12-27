@@ -27,7 +27,7 @@ export default {
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
     const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
     const { isInExcel } = appSessionModel.stateRef
-    if (isInExcel) {
+    if (isInExcel.value) {
       const excelModel = new ExcelModule()
       await excelModel.registerOnSelectCellChangeEvent(
         cellValueModel.updateFromExcel
@@ -38,7 +38,7 @@ export default {
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
     const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
     const { isInExcel } = appSessionModel.stateRef
-    if (isInExcel) {
+    if (isInExcel.value) {
       const excelModel = new ExcelModule()
       await excelModel.unregisterOnSelectCellChangeEvent(
         cellValueModel.updateFromExcel

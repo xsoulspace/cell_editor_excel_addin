@@ -48,7 +48,6 @@
 </template>
 <script lang="ts">
 import { inject } from 'vue'
-import { updateIsDialogActive } from '@/screens/Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 
 export default {

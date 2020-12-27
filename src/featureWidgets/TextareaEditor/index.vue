@@ -3,11 +3,11 @@ textarea.textearea(
   name="text"
   rows="1"
   placeholder="Some cell text.."
-  v-model='textValue'
+  v-model='localValue'
 )
 </template>
 <script lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { SaveAsContentType } from '@/constants/SaveAsContentType'
 import { HtmlToTextCoverter } from '@/modules/HtmlToTextConverter'
 import { AppSettingsModel } from '../AppSettings/Model'
@@ -42,21 +42,28 @@ export default {
       const finalText = (() => {
         switch (saveAsContentType.value) {
           case SaveAsContentType.html:
+            return props.modelValue
+          case SaveAsContentType.plainText:
             const formattedText = HtmlToTextCoverter.toText({
               html: props.modelValue,
             })
             return formattedText
-          case SaveAsContentType.plainText:
-            return props.modelValue
         }
       })()
       return finalText
     }
     const textValue = computed({
       set: updateValue,
-      get: () => props.modelValue,
+      get: getValue,
     })
-    return { textValue }
+    const localValue = ref('')
+    onMounted(() => {
+      localValue.value = textValue.value
+    })
+    watch(localValue, (newValue, oldValue) => {
+      updateValue(newValue)
+    })
+    return { localValue }
   },
 }
 </script>
