@@ -44,11 +44,12 @@ export class CellValueModel implements ProviderStorage<State> {
     cellValueSettingsModel: CellValueSettingsModel
   }) {
     const { appSessionModel, cellValue, cellValueSettingsModel } = arg
+    const { wrapText } = cellValueSettingsModel.stateRef
     const { isInExcel } = appSessionModel.stateRef
     if (isInExcel.value) {
       await this.excelModule.setValueToSelectedCell({
         cellValue,
-        wrapText: cellValueSettingsModel.wrapText,
+        wrapText: wrapText.value,
       })
     }
     this.excelCellValue = cellValue
