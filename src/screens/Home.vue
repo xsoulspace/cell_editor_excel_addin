@@ -9,22 +9,14 @@ div
     template(v-slot:body)
       AppSettings
       CellValueSettings
+
   div.is-fullsize
-
-    //- quill-editor(
-    //- )
-    textarea(
-      class="textearea"
-      name="text"
-      rows="1"
-      placeholder="Some cell text.."
+    QuillEditor(
+      v-if='textEditor == TextEditor.WYSIWYG'
     )
-  //- Settings Modal
-  
-  //- (
-  //-   :isActive='true'
-  //- )
-
+    TextareaEditor(
+      v-if='textEditor == TextEditor.plainText'
+    )
         
 </template>
 
@@ -34,12 +26,16 @@ import { ref, provide } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
+import { Provider } from '@/modules/Provider'
+import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
+import { TextEditor } from '@/constants/TextEditor'
 
 const {
   AppBar,
   AppSettings,
   QuillEditor,
   CellValueSettings,
+  TextareaEditor,
 } = featureWidgets.widgets
 const { DialogPopup } = uiWidgets.widgets
 
@@ -50,6 +46,7 @@ export default {
     AppSettings,
     DialogPopup,
     CellValueSettings,
+    TextareaEditor,
   },
   setup() {
     const isDialogActive = ref(false)
@@ -57,7 +54,9 @@ export default {
       isDialogActive.value = isActive
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
-    return { isDialogActive }
+    const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
+    const { textEditor } = appSettings.stateRef
+    return { isDialogActive, textEditor, TextEditor }
   },
 }
 </script>

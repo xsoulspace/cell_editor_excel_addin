@@ -5,3 +5,8 @@ textarea.textearea(
   placeholder="Some cell text.."
 )
 </template>
+<script lang="ts">
+export default {
+  name: 'TextareaEditor',
+}
+</script>
