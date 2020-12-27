@@ -5,7 +5,7 @@
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { CellValueModel } from '@/models/CellValueModel'
-import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
+import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model'
 import { Provider } from '@/modules/Provider'
 import App from './App.vue'
 import { AppSessionModel } from './models/AppSessionModel'
@@ -18,7 +18,7 @@ export default {
     Provider.providers([
       MainLocalization,
       AppSettingsModel,
-      CellValueSettings,
+      CellValueSettingsModel,
       AppSessionModel,
       CellValueModel,
     ])

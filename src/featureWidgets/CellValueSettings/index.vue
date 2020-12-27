@@ -10,14 +10,16 @@ div
 </template>
 <script lang="ts">
 import { Provider } from '@/modules/Provider'
-import { CellValueSettings } from './Model'
+import { CellValueSettingsModel } from './Model'
 export default {
   name: 'CellValueSettings',
   setup() {
-    const appSettings = Provider.get<CellValueSettings>(CellValueSettings)
-    const { wrapText } = appSettings.stateRef
+    const cellValueSettingsModel = Provider.get<CellValueSettingsModel>(
+      CellValueSettingsModel
+    )
+    const { wrapText } = cellValueSettingsModel.stateRef
     const updateWrapText = () => {
-      appSettings.wrapText = !wrapText.value
+      cellValueSettingsModel.wrapText = !wrapText.value
     }
     return {
       wrapText,

@@ -1,1 +1,1 @@
-export type ExcelData = Maybe<string | boolean | number>[][]
+declare type ExcelData = Maybe<string | boolean | number>[][]

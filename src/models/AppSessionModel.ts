@@ -3,7 +3,6 @@ import {
   StaticProviderStorage,
 } from '@/entities/ProviderStorage'
 import { StaticClass } from '@/entities/StaticClass'
-import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
 import { getIsInExcelApp } from '@/main'
 import { reactive, toRefs } from 'vue'
 export type State = {
@@ -15,7 +14,6 @@ export class AppSessionModel implements ProviderStorage<State> {
     isInExcel: false,
   })
   static storageName = 'AppSessionModel'
-  cellValueSettings: CellValueSettings = {} as CellValueSettings
   constructor() {
     this.isInExcel = getIsInExcelApp()
   }

@@ -10,11 +10,11 @@ type State = {
   wrapText: boolean
 }
 @StaticClass<StaticProviderStorage<State>>()
-export class CellValueSettings implements ProviderStorage<State> {
-  static storageName = 'CellValueSettings'
+export class CellValueSettingsModel implements ProviderStorage<State> {
+  static storageName = 'CellValueSettingsModel'
   static state: State = reactive({ wrapText: false })
   get stateRef() {
-    return toRefs(CellValueSettings.state)
+    return toRefs(CellValueSettingsModel.state)
   }
   @saveToStorage<State, boolean>()
   set wrapText(value: boolean) {
@@ -23,7 +23,7 @@ export class CellValueSettings implements ProviderStorage<State> {
   }
 
   loadFromStorage() {
-    const stateStr = localStorage.getItem(CellValueSettings.storageName)
+    const stateStr = localStorage.getItem(CellValueSettingsModel.storageName)
     if (stateStr == null) return
     this.fromJson({ stateStr })
   }

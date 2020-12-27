@@ -1,4 +1,3 @@
-import { ExcelData } from '@/entities/ExcelData'
 import { getExcelContext } from './ExcelContext'
 
 export namespace ExcelModule {

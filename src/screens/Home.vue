@@ -13,22 +13,27 @@ div
   div.is-fullsize
     QuillEditor(
       v-if='textEditor == TextEditor.WYSIWYG'
+      v-model="excelCellValue"
     )
     TextareaEditor(
       v-if='textEditor == TextEditor.plainText'
+      v-model="excelCellValue"
     )
         
 </template>
 
 <script lang="ts">
 import { featureWidgets } from '@/router/featureWidgetsRouter'
-import { ref, provide } from 'vue'
+import { ref, provide, computed } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { updateIsDialogActive } from './Home.d'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 import { Provider } from '@/modules/Provider'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { TextEditor } from '@/constants/TextEditor'
+import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model'
+import { CellValueModel } from '@/models/CellValueModel'
+import { AppSessionModel } from '@/models/AppSessionModel'
 
 const {
   AppBar,
@@ -55,8 +60,23 @@ export default {
     }
     provide(FeatureWidgetProvider.updateIsDialogActive, updateIsDialogActive)
     const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
+    const cellValueSettingsModel = Provider.get<CellValueSettingsModel>(
+      CellValueSettingsModel
+    )
+    const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
+    const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
+    const excelCellValue = computed({
+      set: cellValue => {
+        cellValueModel.updateValue({
+          cellValue,
+          appSessionModel,
+          cellValueSettingsModel,
+        })
+      },
+      get: () => cellValueModel.stateRef.excelCellValue.value,
+    })
     const { textEditor } = appSettings.stateRef
-    return { isDialogActive, textEditor, TextEditor }
+    return { isDialogActive, textEditor, TextEditor, excelCellValue }
   },
 }
 </script>

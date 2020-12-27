@@ -5,7 +5,7 @@
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { CellValueModel } from '@/models/CellValueModel'
-import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
+import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model'
 import { Provider } from '@/modules/Provider'
 import { AppSessionModel } from './models/AppSessionModel'
 
@@ -17,8 +17,10 @@ export default {
     appSettings.loadFromStorage()
     mainLocalization.locale = appSettings.locale
 
-    const cellValueSettings = Provider.get<CellValueSettings>(CellValueSettings)
-    cellValueSettings.loadFromStorage()
+    const cellValueSettingsModel = Provider.get<CellValueSettingsModel>(
+      CellValueSettingsModel
+    )
+    cellValueSettingsModel.loadFromStorage()
   },
   async mounted() {
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)

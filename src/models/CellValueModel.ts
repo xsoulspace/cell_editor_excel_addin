@@ -1,10 +1,9 @@
-import { ExcelData } from '@/entities/ExcelData'
 import {
   ProviderStorage,
   StaticProviderStorage,
 } from '@/entities/ProviderStorage'
 import { StaticClass } from '@/entities/StaticClass'
-import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
+import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model'
 import { ExcelModule } from '@/modules/ExcelModule'
 import { reactive, toRefs } from 'vue'
 import { AppSessionModel } from './AppSessionModel'
@@ -47,14 +46,14 @@ export class CellValueModel implements ProviderStorage<State> {
   async updateValue(arg: {
     cellValue: string
     appSessionModel: AppSessionModel
-    cellValueSettings: CellValueSettings
+    cellValueSettingsModel: CellValueSettingsModel
   }) {
-    const { appSessionModel, cellValue, cellValueSettings } = arg
+    const { appSessionModel, cellValue, cellValueSettingsModel } = arg
     const { isInExcel } = appSessionModel.stateRef
     if (isInExcel.value) {
       await this.excelModule.setValueToSelectedCell({
         cellValue,
-        wrapText: cellValueSettings.wrapText,
+        wrapText: cellValueSettingsModel.wrapText,
       })
     }
     this.excelCellValue = cellValue
@@ -63,7 +62,6 @@ export class CellValueModel implements ProviderStorage<State> {
   set excelCellValue(value: string) {
     const { excelCellValue } = this.stateRef
     excelCellValue.value = value
-    console.log(CellValueModel.state)
   }
   get stateRef() {
     return toRefs(CellValueModel.state)
