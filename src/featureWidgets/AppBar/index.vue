@@ -2,11 +2,13 @@
 div.header 
   .tabs
     .tabs__tab(
+      @click='changeTextEditor(TextEditor.WYSIWYG)'
     ) 
       div.button.--has-accent
-        span WYSIWYG     
+        span WYSIWYG 
     
     div.tabs__tab(
+      @click='changeTextEditor(TextEditor.plainText)'
     )
       div.button.--has-accent
         span.icon
@@ -32,6 +34,7 @@ import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 import { updateIsDialogActive } from '@/screens/Home.d'
 import { Provider } from '@/modules/Provider'
 import { AppSettingsModel } from '../AppSettings/Model'
+import { TextEditor } from '@/constants/TextEditor'
 
 export default {
   name: 'AppBar',
@@ -40,8 +43,12 @@ export default {
     const updateIsDialogActive = inject<updateIsDialogActive>(
       FeatureWidgetProvider.updateIsDialogActive
     )
-    Provider.get<AppSettingsModel>(AppSettingsModel)
-    return { updateIsDialogActive }
+    const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
+    const { textEditor } = appSettings.stateRef
+    const changeTextEditor = (value: TextEditor) => {
+      appSettings.textEditor = value
+    }
+    return { updateIsDialogActive, changeTextEditor, TextEditor }
   },
 }
 </script>

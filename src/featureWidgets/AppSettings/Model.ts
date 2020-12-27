@@ -1,13 +1,13 @@
 import { AppTheme } from '@/constants/AppTheme'
-import { DefaultEditor } from '@/constants/DefaultEditor'
 import { Locales } from '@/constants/Locales'
+import { TextEditor } from '@/constants/TextEditor'
 import { saveToStorage, StaticProviderStorage } from '@/entities/StaticProvider'
 import { reactive, toRefs } from 'vue'
 
 export type State = {
   locale: Locales
   theme: AppTheme
-  defaultEditor: DefaultEditor
+  textEditor: TextEditor
 }
 
 export class AppSettingsModel implements StaticProviderStorage<State> {
@@ -15,7 +15,7 @@ export class AppSettingsModel implements StaticProviderStorage<State> {
   static state: State = reactive({
     locale: Locales.eng,
     theme: AppTheme.dark,
-    defaultEditor: DefaultEditor.plainText,
+    textEditor: TextEditor.plainText,
   })
 
   get stateRef() {
@@ -40,13 +40,13 @@ export class AppSettingsModel implements StaticProviderStorage<State> {
     locale.value = value
   }
 
-  @saveToStorage<State, DefaultEditor>({
+  @saveToStorage<State, TextEditor>({
     storageName: AppSettingsModel.storageName,
     state: AppSettingsModel.state,
   })
-  set defaultEditor(value: DefaultEditor) {
-    const { defaultEditor } = this.stateRef
-    defaultEditor.value = value
+  set textEditor(value: TextEditor) {
+    const { textEditor } = this.stateRef
+    textEditor.value = value
   }
 
   loadFromStorage() {
@@ -59,6 +59,6 @@ export class AppSettingsModel implements StaticProviderStorage<State> {
     const settingsState = JSON.parse(stateStr) as Partial<State>
     this.theme = settingsState.theme ?? AppTheme.light
     this.locale = settingsState.locale ?? Locales.eng
-    this.defaultEditor = settingsState.defaultEditor ?? DefaultEditor.plainText
+    this.textEditor = settingsState.textEditor ?? TextEditor.plainText
   }
 }
