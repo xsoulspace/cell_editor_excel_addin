@@ -13,14 +13,14 @@ div
     ) {{locale}}
 </template>
 <script lang="ts">
-import { AppSettingsStore } from './Store'
+import { AppSettingsModel } from './Model'
 import { Locales } from '@/constants/Locales'
 import { AppTheme } from '@/constants/AppTheme'
 import { Provider } from '@/modules/Provider'
 export default {
   name: 'AppSettings',
   setup() {
-    const appSettings = Provider.get<AppSettingsStore>(AppSettingsStore)
+    const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
     const { theme, locale } = appSettings.stateRef
     const changeTheme = () => {
       appSettings.theme =

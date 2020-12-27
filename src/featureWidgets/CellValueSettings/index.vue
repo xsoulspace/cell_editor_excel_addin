@@ -10,7 +10,7 @@ div
 </template>
 <script lang="ts">
 import { Provider } from '@/modules/Provider'
-import { CellValueSettings } from './Store'
+import { CellValueSettings } from './Model'
 export default {
   name: 'CellValueSettings',
   setup() {

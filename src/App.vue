@@ -4,15 +4,15 @@
 <script lang="ts">
 import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
-import { AppSettingsStore } from '@/featureWidgets/AppSettings/Store'
-import { CellValueStore } from './featureWidgets/CellValueStore'
-import { CellValueSettings } from './featureWidgets/CellValueSettings/Store'
-import { Provider } from './modules/Provider'
+import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
+import { CellValueModel } from '@/models/CellValueModel'
+import { CellValueSettings } from '@/featureWidgets/CellValueSettings/Model'
+import { Provider } from '@/modules/Provider'
 
 export default {
   name: 'App',
   setup() {
-    const appSettings = Provider.get<AppSettingsStore>(AppSettingsStore)
+    const appSettings = Provider.get<AppSettingsModel>(AppSettingsModel)
     const mainLocalization = Provider.get<MainLocalization>(MainLocalization)
     appSettings.loadFromStorage()
     mainLocalization.locale = appSettings.locale

@@ -30,6 +30,8 @@ div.header
 import { inject } from 'vue'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 import { updateIsDialogActive } from '@/screens/Home.d'
+import { Provider } from '@/modules/Provider'
+import { AppSettingsModel } from '../AppSettings/Model'
 
 export default {
   name: 'AppBar',
@@ -38,7 +40,7 @@ export default {
     const updateIsDialogActive = inject<updateIsDialogActive>(
       FeatureWidgetProvider.updateIsDialogActive
     )
-
+    Provider.get<AppSettingsModel>(AppSettingsModel)
     return { updateIsDialogActive }
   },
 }
