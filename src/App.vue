@@ -2,7 +2,6 @@
   <router-view />
 </template>
 <script lang="ts">
-import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { CellValueModel } from '@/models/CellValueModel'
@@ -16,8 +15,12 @@ export default {
     const mainLocalization = Provider.get<MainLocalization>(MainLocalization)
     appSettings.loadFromStorage()
     mainLocalization.locale = appSettings.locale
+
     const cellValueSettings = Provider.get<CellValueSettings>(CellValueSettings)
     cellValueSettings.loadFromStorage()
+
+    const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
+    cellValueModel.init({ cellValueSettings })
   },
 }
 </script>

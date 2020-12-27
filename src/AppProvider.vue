@@ -2,7 +2,6 @@
 App
 </template>
 <script lang="ts">
-import { Locales } from '@/constants/Locales'
 import { MainLocalization } from '@/localization/MainLocalization'
 import { AppSettingsModel } from '@/featureWidgets/AppSettings/Model'
 import { CellValueModel } from '@/models/CellValueModel'
