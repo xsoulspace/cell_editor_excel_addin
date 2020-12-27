@@ -28,12 +28,13 @@ export class ExcelModule {
     if (withWrap) propertyNames.push('format', 'wrapText')
 
     activeCell.load(propertyNames)
-
     await context.sync()
     const cellValue = activeCell.values
+
+    const wrapText = withWrap ? activeCell.format.wrapText ?? false : false
     const response: ExcelModule.getSelectedCellValueResponse = {
       cellValue,
-      wrapText: activeCell.format.wrapText ?? null,
+      wrapText,
     }
     return response
   }
@@ -41,6 +42,7 @@ export class ExcelModule {
   async setValueToSelectedCell(arg: ExcelModule.setValueToSelectedCellArg) {
     const { cellValue, wrapText } = arg
     const context = await getExcelContext()
+    context.application.suspendScreenUpdatingUntilNextSync()
     const activeCell = context.workbook.getSelectedRange()
 
     activeCell.values = [[cellValue]]
@@ -55,6 +57,7 @@ export class ExcelModule {
     const { wrapText } = arg
 
     const context = await getExcelContext()
+    context.application.suspendScreenUpdatingUntilNextSync()
     const activeCell = context.workbook.getSelectedRange()
     if (wrapText != null) activeCell.format.wrapText = wrapText
 

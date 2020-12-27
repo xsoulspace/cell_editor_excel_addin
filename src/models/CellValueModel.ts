@@ -20,7 +20,9 @@ export class CellValueModel implements ProviderStorage<State> {
 
   getStringFromExcelArr<T extends ExcelData>(value: T) {
     const row = value[0] ?? []
+
     const cellValue = row[0]
+
     if (cellValue) {
       if (cellValue == null) return ''
       if (typeof cellValue != 'string') {
@@ -35,8 +37,9 @@ export class CellValueModel implements ProviderStorage<State> {
     const value = await this.excelModule.getSelectedCellValue({
       withWrap: false,
     })
-    if (value.cellValue)
+    if (value.cellValue) {
       this.excelCellValue = this.getStringFromExcelArr(value.cellValue)
+    }
   }
   async updateValue(arg: {
     cellValue: string

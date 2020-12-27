@@ -61,8 +61,6 @@ export default {
     })
     const localValue = ref('')
     watch(saveAsContentType, (newContentType, oldContentType) => {
-      console.log('conver')
-      console.log(textValue.value)
       localValue.value = textValue.value
     })
     onMounted(() => {
