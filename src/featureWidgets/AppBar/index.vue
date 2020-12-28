@@ -12,7 +12,7 @@ div.header
     )
       div.button.--has-accent
         span.icon
-          i.fas.fa-sliders-h Ввод
+          i.fas.fa-pencil Simple
 
     div.tabs__tab( 
       @click='updateIsDialogActive(true)'
@@ -25,7 +25,7 @@ div.header
     div.tabs__tab
       div.button.--has-accent
         span.icon 
-          i.fas.fa-sliders-h info
+          i.fas.fa-info
 </template>
 
 <script lang="ts">
