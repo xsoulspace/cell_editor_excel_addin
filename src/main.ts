@@ -33,7 +33,6 @@ const addOfficeScript = () => {
   scriptTag.src = 'https://appsforoffice.microsoft.com/lib/1/hosted/office.js'
   scriptTag.id = 'office'
   scriptTag.async = false
-  console.log({ head: document.getElementsByTagName('head') })
   document.getElementsByTagName('head')[0].appendChild(scriptTag)
   scriptTag.addEventListener('load', main)
 }

@@ -46,6 +46,14 @@ export class CellValueModel implements ProviderStorage<State> {
     appSessionModel: AppSessionModel
     cellValueSettingsModel: CellValueSettingsModel
   }) {
+    await this.updateExcelValue(arg)
+    this.excelCellValue = arg.cellValue
+  }
+  async updateExcelValue(arg: {
+    cellValue: string
+    appSessionModel: AppSessionModel
+    cellValueSettingsModel: CellValueSettingsModel
+  }) {
     const { appSessionModel, cellValue, cellValueSettingsModel } = arg
     const { wrapText } = cellValueSettingsModel.stateRef
     const { isInExcel } = appSessionModel.stateRef
@@ -55,9 +63,7 @@ export class CellValueModel implements ProviderStorage<State> {
         wrapText: wrapText.value,
       })
     }
-    this.excelCellValue = cellValue
   }
-
   set excelCellValue(value: string) {
     const { excelCellValue } = this.stateRef
     excelCellValue.value = value

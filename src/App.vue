@@ -30,9 +30,9 @@ export default {
     if (isInExcel.value) {
       const excelModel = new ExcelModule()
       await excelModel.registerOnSelectCellChangeEvent(async () => {
-        console.log('updating')
         await cellValueModel.updateFromExcel()
       })
+      await cellValueModel.updateFromExcel()
     }
   },
   async beforeUnmount() {

@@ -1,5 +1,5 @@
 import { defineAsyncComponent } from 'vue'
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createMemoryHistory, createRouter, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -10,6 +10,6 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const AppRouter = createRouter({
-  history: createWebHashHistory(),
+  history: createMemoryHistory(),
   routes,
 })

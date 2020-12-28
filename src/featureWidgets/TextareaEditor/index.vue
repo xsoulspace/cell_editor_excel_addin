@@ -66,8 +66,11 @@ export default {
     onMounted(() => {
       localValue.value = textValue.value
     })
+    watch(textValue, (newValue, oldValue) => {
+      localValue.value = newValue
+    })
     watch(localValue, (newValue, oldValue) => {
-      updateValue(newValue)
+      textValue.value = newValue
     })
     return { localValue }
   },

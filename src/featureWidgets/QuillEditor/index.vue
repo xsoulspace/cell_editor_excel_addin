@@ -90,6 +90,14 @@ export default {
       plainText: [],
     }
     let editor: Maybe<any> = null
+    const updateEditorValue = (value: string) => {
+      if (editor) {
+        editor.root.innerHTML = value
+      }
+    }
+    watch(textValue, (newValue, oldValue) => {
+      updateEditorValue(newValue)
+    })
     onMounted(() => {
       ;(editorReference.value as any).innerHTML = ''
       editor = new Quill(editorReference.value, {
@@ -101,7 +109,7 @@ export default {
         theme: 'snow',
       })
 
-      if (editor) editor.root.innerHTML = textValue.value
+      updateEditorValue(textValue.value)
       editor.on('text-change', () => updateValue(editor.root.innerHTML))
     })
     return { editorReference }

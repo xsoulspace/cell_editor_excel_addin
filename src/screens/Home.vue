@@ -13,18 +13,20 @@ div
   div.is-fullsize
     QuillEditor(
       v-if='textEditor == TextEditor.WYSIWYG'
-      v-model="excelCellValue"
+      :modelValue="excelCellValue"
+      @update:modelValue='updateExcelValue'
     )
     TextareaEditor(
       v-if='textEditor == TextEditor.plainText'
-      v-model="excelCellValue"
+      :modelValue="excelCellValue"
+      @update:modelValue='updateExcelValue'
     )
         
 </template>
 
 <script lang="ts">
 import { featureWidgets } from '@/router/featureWidgetsRouter'
-import { ref, provide, computed } from 'vue'
+import { ref, provide, computed, watch } from 'vue'
 import { uiWidgets } from '@/router/uiWidgetsRouter'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
 import { Provider } from '@/modules/Provider'
@@ -66,18 +68,30 @@ export default {
     )
     const cellValueModel = Provider.get<CellValueModel>(CellValueModel)
     const appSessionModel = Provider.get<AppSessionModel>(AppSessionModel)
-    const excelCellValue = computed({
-      set: cellValue => {
-        cellValueModel.updateValue({
-          cellValue,
-          appSessionModel,
-          cellValueSettingsModel,
-        })
-      },
-      get: () => cellValueModel.stateRef.excelCellValue.value,
+    const excelCellValue = computed(
+      () => cellValueModel.stateRef.excelCellValue.value
+    )
+    const updateExcelValue = async (cellValue: string) => {
+      await cellValueModel.updateExcelValue({
+        cellValue,
+        appSessionModel,
+        cellValueSettingsModel,
+      })
+    }
+    const { textEditor, saveAsContentType } = appSettings.stateRef
+    watch(textEditor, async () => {
+      await cellValueModel.updateFromExcel()
     })
-    const { textEditor } = appSettings.stateRef
-    return { isDialogActive, textEditor, TextEditor, excelCellValue }
+    watch(saveAsContentType, async () => {
+      await cellValueModel.updateFromExcel()
+    })
+    return {
+      isDialogActive,
+      textEditor,
+      TextEditor,
+      excelCellValue,
+      updateExcelValue,
+    }
   },
 }
 </script>

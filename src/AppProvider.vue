@@ -9,6 +9,7 @@ import { CellValueSettingsModel } from '@/featureWidgets/CellValueSettings/Model
 import { Provider } from '@/modules/Provider'
 import App from './App.vue'
 import { AppSessionModel } from './models/AppSessionModel'
+import { inject, provide } from 'vue'
 export default {
   name: 'AppProvider',
   components: {
