@@ -1,19 +1,23 @@
 <template lang="pug">
-div
-  div App Settings
-  div Theme
+div.form
+  div.form__field
+    .form__field-p App Settings
+  div.form__field 
+    .form__field-p Theme
     //- TODO: add selector
-    div(
+    div.form__field-p(
       @click='changeTheme'
     ) {{theme}}
-  div Language
+  div.form__field 
+    .form__field-p Language
     //- TODO: add selector
-    div(
+    div.form__field-p(
       @click='changeLocale'
     ) {{locale}}
-  div Save As Content Type:
+  div.form__field 
+    .form__field-p Save As Content Type:
     //- TODO: add selector
-    div(
+    div.form__field-p(
       @click='changeSaveAsContentType'
     ) {{saveAsContentType}}
 </template>

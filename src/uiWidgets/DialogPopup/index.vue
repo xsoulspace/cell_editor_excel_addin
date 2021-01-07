@@ -18,12 +18,11 @@
     section.modal__card-body
       slot(name='body')
       .form
+        
         .form__field
-          .checkbox__input
-          .chechbox__label Перенос строки
-        .form__field
-          .checkbox__input  
-          .chechbox__label Использовать WYSIWYG(html) редактор по умолчанию
+          .form__field-p Перенос строки
+        .form__field 
+          .form__field-p Использовать WYSIWYG(html) редактор по умолчанию
   
   
   

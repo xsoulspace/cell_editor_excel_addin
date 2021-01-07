@@ -1,9 +1,11 @@
 <template lang="pug">
 div
-  div Cell Settings
-  div Wrap text?
+  div.form__field
+    .form__field-p Cell Settings
+  div.form__field
+    .form__field-p Wrap text?
     //- TODO: add checkbox
-    div(
+    div.form__field-p(
       @click='updateWrapText'
     ) is {{wrapText}}
   
