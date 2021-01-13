@@ -1,23 +1,27 @@
 <template lang="pug">
-div.form
-  div.form__field
-    .form__field-p App Settings
-  div.form__field 
-    .form__field-p Theme
+div
+  .form__field
+    .checkbox__input
+    div App Settings
+  .form__field
+    .checkbox__input 
+    div Theme
     //- TODO: add selector
-    div.form__field-p(
+    div(
       @click='changeTheme'
     ) {{theme}}
-  div.form__field 
-    .form__field-p Language
+  .form__field
+    .checkbox__input 
+    div Language
     //- TODO: add selector
-    div.form__field-p(
+    div(
       @click='changeLocale'
     ) {{locale}}
-  div.form__field 
-    .form__field-p Save As Content Type:
+  .form__field
+    .checkbox__input 
+    div Save As Content Type:
     //- TODO: add selector
-    div.form__field-p(
+    div(
       @click='changeSaveAsContentType'
     ) {{saveAsContentType}}
 </template>

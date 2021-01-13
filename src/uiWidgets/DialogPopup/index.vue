@@ -14,36 +14,18 @@
       )
         span.icon.--has-accent
           i.fas.fa-times
-
+    
     section.modal__card-body
-      slot(name='body')
-      .form
-        
+      .form 
+        slot(name='body')         
         .form__field
-          .form__field-p Перенос строки
-        .form__field 
-          .form__field-p Использовать WYSIWYG(html) редактор по умолчанию
+          .checkbox__input
+          div Перенос строки
+        .form__field
+          .checkbox__input 
+          div Использовать WYSIWYG(html) редактор по умолчанию
+        
   
-  
-  
-  
-  //- div.modal__background(@click="isSettingsActive = false")
-  //-         //- .checkbox__input(
-  //-         //-   v-model="wrapText" type="checkbox"
-  //-         //- ) 
-  //-     //- 
-  //-     //-   .chechbox.input(
-  //-     //-     v-model="defaultEditor" type="checkbox"
-  //-     //-   )
-  //-     //-    
-   
-  //-   footer.modal__card-foot
-  //-     button.button.is-success.has-fluid-width.has-margin(
-  //-       @click="modalApplyHandler"
-  //-     ) Применить
-  //-     button.button.has-fluid-width.has-margin(
-  //-       @click="isSettingsActive = false"
-  //-     ) Отменить 
 </template>
 <script lang="ts">
 import { inject } from 'vue'
