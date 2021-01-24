@@ -19,19 +19,27 @@
       .form 
         slot(name='body')         
         .form__field
-          .checkbox__input
-          div Перенос строки
+          checkbox
+          p.checkbox__label Перенос строки
         .form__field
-          .checkbox__input 
-          div Использовать WYSIWYG(html) редактор по умолчанию
-        
+          checkbox
+          p.checkbox__label Использовать WYSIWYG(html) редактор по умолчанию
+        .form__field
+          checkbox
+
+
+               
   
 </template>
 <script lang="ts">
 import { inject } from 'vue'
 import { FeatureWidgetProvider } from '@/constants/FeatureWidgetProvider'
+import Checkbox from '@/uiWidgets/DialogPopup/Checkbox.vue'
 
 export default {
+  components: {
+    Checkbox,
+  },
   name: 'DialogPopup',
   props: {
     isActive: { type: Boolean, required: true },

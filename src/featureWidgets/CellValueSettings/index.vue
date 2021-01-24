@@ -2,10 +2,10 @@
 div
   .form__field
     .checkbox__input
-    div Cell Settings
+    p.checkbox__label Cell Settings
   .form__field
     .checkbox__input
-    div Wrap text?
+    p.checkbox__label Wrap text?
     //- TODO: add checkbox
     div(
       @click='updateWrapText'

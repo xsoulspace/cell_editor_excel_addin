@@ -2,24 +2,24 @@
 div
   .form__field
     .checkbox__input
-    div App Settings
+    p.checkbox__label App Settings
   .form__field
     .checkbox__input 
-    div Theme
+    p.checkbox__label Theme
     //- TODO: add selector
     div(
       @click='changeTheme'
     ) {{theme}}
   .form__field
     .checkbox__input 
-    div Language
+    p.checkbox__label Language
     //- TODO: add selector
     div(
       @click='changeLocale'
     ) {{locale}}
   .form__field
     .checkbox__input 
-    div Save As Content Type:
+    p.checkbox__label Save As Content Type:
     //- TODO: add selector
     div(
       @click='changeSaveAsContentType'
